@@ -1,0 +1,30 @@
+{
+  "name": "foodies",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephaniesomade/foodies.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stephaniesomade/foodies/issues"
+  },
+  "homepage": "https://github.com/stephaniesomade/foodies#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongoose": "^6.3.2",
+    "nodemon": "^2.0.16",
+    "express-handlebars": "^6.0.5",
+    "express-session": "^1.17.2",
+    "http-errors": "~1.6.3",
+    "mongodb": "^3.4.1",
+    "hbs": "^4.1.0"
+  }
+}

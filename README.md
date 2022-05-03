@@ -2,7 +2,7 @@
 
 # Foodies Model
 
-<img src='./public/img/foodies.drawio.png>
+<img src='./public/foodies.drawio.png>
 
 This project uses: 
 - [Express](https://expressjs.com/) web framework for Node.js.

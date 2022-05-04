@@ -1,4 +1,4 @@
-
+//generate random meal
 const get_meal_btn = document.getElementById('get_meal');
 const meal_container = document.getElementById('meal');
 
@@ -52,4 +52,44 @@ const createMeal = (meal) => {
 	
 	meal_container.innerHTML = newInnerHTML;
 }
+
+// filter by ingredient
+
+const searchForm = document.querySelector('.search_form');
+let serchQuery = '';
+
+searchForm.addEventListener('submit', (event) => {
+	event.preventDefault();
+	searchQeury = event.target.querySelector('input').value;
+	fetchAPI(searchQeury);
+
+});
+async function fetchAPI() {
+ const baseURL = `https://themealdb.com/api/json/v1/1/filter.php?i=${searchQeury}`
+ const response = await fetch(baseURL);
+ const data = await response.json();
+ console.log(data.meals);
+ generateHTML(data.meals);
+}
+
+function generateHTML(result) {
+	let newHTML = '';
+	result.map(result  => {
+			newHTML += 
+		`<div class="row">
+			<div class="columns five">
+			<br>
+			<br>
+			<h3 id="meal_str">${result.strMeal}</h3>
+			<img src="${result.strMealThumb}" alt="Meal Image" width="200" height="200" >
+			</div>
+			</div>`
+		});
+
+	meal_container.innerHTML = newHTML;
+}
+
+let meal_str = document.getElementById("meal_str")
+
+
 

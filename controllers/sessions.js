@@ -18,12 +18,16 @@ const SessionsController = {
         res.redirect("/sessions/new");
       } else {
         req.session.user = user;
-        res.redirect("home/index");
+        res.redirect("/");
       }
     });
   },
   Destroy: (req, res) => {
-  // delete/post
+    console.log("logging out");
+    if (req.session.user && req.cookies.user_sid) {
+      res.clearCookie("user_sid");
+    }
+    res.redirect("/sessions/new");
   }
 }
 

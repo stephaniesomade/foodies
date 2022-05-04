@@ -1,13 +1,47 @@
+const createError = require("http-errors");
 const express = require("express");
 const app = express();
 const path = require("path");
 const session = require("express-session");
 const mongoose = require('mongoose');
+var cookieParser = require("cookie-parser");
+var morgan = require("morgan")
 
+app.use(morgan("dev"));
+
+app.use(cookieParser());
+ 
+// initialize express-session to allow us track the logged-in user across sessions.
+app.use(
+  session({
+    key: "user_sid",
+    secret: "somerandonstuffs",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 600000,
+    },
+  })
+);
+
+app.use((req, res, next) => {
+  if (req.cookies.user_sid && !req.session.user) {
+    res.clearCookie("user_sid");
+  }
+  next();
+});
+ 
+// middleware function to check for logged-in users
+const sessionChecker = (req, res, next) => {
+  if (!req.session.user && !req.cookies.user_sid) {
+    res.redirect("/sessions/new");
+  } else {
+    next();
+  }
+};
 
 // connect to the database
 mongoose.connect('mongodb://localhost:27017/friend-website')
-// mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true})
 const database = mongoose.connection
 database.on('error', (error) => console.error(error))
 database.once('open', () => console.log("Connected to the Database"))

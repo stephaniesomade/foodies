@@ -65,10 +65,9 @@ searchForm.addEventListener('submit', (event) => {
 
 });
 async function fetchAPI() {
- const baseURL = `https://themealdb.com/api/json/v1/1/filter.php?i=${searchQeury}`
+ const baseURL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchQeury}`
  const response = await fetch(baseURL);
  const data = await response.json();
- console.log(data.meals);
  generateHTML(data.meals);
 }
 
@@ -80,16 +79,28 @@ function generateHTML(result) {
 			<div class="columns five">
 			<br>
 			<br>
-			<h3 id="meal_str">${result.strMeal}</h3>
-			<img src="${result.strMealThumb}" alt="Meal Image" width="200" height="200" >
+			<h3>${result.strMeal}</h3>
+			<button><img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200"></button>
+			<p hidden>${result.idMeal}</p>
 			</div>
 			</div>`
 		});
-
+	
 	meal_container.innerHTML = newHTML;
-}
 
-let meal_str = document.getElementById("meal_str")
+	// let mealId = `${result.idMeal}`
+	// let meal_img = document.getElementById("meal_img");
 
+	// meal_img.addEventListener('click', (event) => {
+	// event.preventDefault();
+	// fetchNextApi(mealId);
+	// });
 
+	// 	function fetchNextApi() {
+	// 	const fetchNextApi = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`
+	// 	const nextResponse = fetch(fetchNextApi);
+	// 	const dataResponse = nextResponse.json();
+	// 	console.log(dataResponse);
+	// }
+};
 

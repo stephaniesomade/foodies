@@ -62,6 +62,7 @@ const UsersRouter = require("./routes/users")
 
 app.use("/", HomeRouter);
 app.use("/sessions", SessionsRouter);
+app.use("/users/profile", sessionChecker, UsersRouter)
 app.use("/users", UsersRouter);
 
 app.listen(3000, () => console.log("Server is listening on port 3000"))

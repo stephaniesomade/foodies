@@ -1,0 +1,28 @@
+
+<script type="text/javascript">
+    function showForm() {
+        document.getElementById('formElement').style.display = 'block';
+}
+    function showEmailForm() {
+        document.getElementById('emailElement').style.display = 'block';
+}
+</script>
+
+<h1>Profile Page</h1>
+<h4>
+  {{name}}
+<button onclick="showForm()">Edit your name</button>
+<form action = "/users/name" method = "post" id="formElement" style="display: none;">
+  <label for="name">Name:</label><br>
+  <input type="text" id="name" name="name" placeholder="New name"><br>
+  <input type="submit" value="Submit">
+</form>
+
+  {{email}}
+<button onclick="showEmailForm()">Edit your email address</button>
+<form action="/users/email" method="post" id="emailElement" style="display: none;">
+  <label for="email">Email:</label><br>
+  <input type="text" id="email" name="email" placeholder="New Email"><br>
+  <input type="submit" value="Submit">
+</form>
+</h4>

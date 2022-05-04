@@ -1,3 +1,4 @@
+const { redirect } = require("express/lib/response");
 const User = require("../models/users")
 
 const UsersController = { 
@@ -5,7 +6,6 @@ const UsersController = {
     res.render("users/new")
   },
   Create: (req, res) => {
-    console.log(req.body)
     const user = new User(req.body);
     user.save((err) => {
       if (err) {
@@ -18,29 +18,23 @@ const UsersController = {
     res.render("users/profile", {name: req.session.user.name, email: req.session.user.email})
   },
   Name: (req, res) => { 
-    const id = req.session.user.id
-    User.updateOne({id: id, name: req.body.name}, (err) => { 
-      if(err) { 
-        throw err;
+    const id = req.session.user._id
+    const newName = req.body.name
+    User.updateOne({id: id, name: newName}, (err) => { 
+      if (err) {
+        throw err
       }
-      if (req.session.user && req.cookies.user_sid) {
-        res.clearCookie("user_sid");
-      }
-      res.redirect("/sessions/new");
-
-    });
-  }, 
+      res.redirect("/sessions/new")
+      })
+    }, 
   Email: (req, res) => { 
-    const id = req.session.user.id
-    User.updateOne({id: id, email: req.body.email}, (err) => { 
+    const id = req.session.user._id
+    const email = req.body.email
+    User.updateOne({id: id, email: email}, (err) => { 
       if(err) { 
         throw err;
       }
-      if (req.session.user && req.cookies.user_sid) {
-        res.clearCookie("user_sid");
-      }
       res.redirect("/sessions/new");
-
     });
   }
 }

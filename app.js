@@ -41,7 +41,7 @@ const sessionChecker = (req, res, next) => {
 };
 
 // connect to the database
-mongoose.connect('mongodb://localhost:27017/foodies')
+mongoose.connect('mongodb://127.0.0.1/foodies')
 const database = mongoose.connection
 database.on('error', (error) => console.error(error))
 database.once('open', () => console.log("Connected to the Database"))

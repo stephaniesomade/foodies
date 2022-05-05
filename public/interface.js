@@ -59,6 +59,7 @@ const searchForm = document.querySelector('.search_form');
 let serchQuery = '';
 
 searchForm.addEventListener('submit', (event) => {
+	meal_container.innerHTML = '';
 	event.preventDefault();
 	searchQeury = event.target.querySelector('input').value;
 	fetchAPI(searchQeury);
@@ -68,7 +69,20 @@ async function fetchAPI() {
  const baseURL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchQeury}`
  const response = await fetch(baseURL);
  const data = await response.json();
- generateHTML(data.meals);
+ console.log(data.meals);
+ const detailedData = data.meals; 
+//  let meals = [];
+
+	detailedData.map(async meal => {
+	const mealId = meal.idMeal;
+	const nextURL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`;
+	const secondaryResponse = await fetch(nextURL);
+	const moreData = await secondaryResponse.json();
+	console.log(moreData);
+	const moreDetailedData = await moreData.meals;
+	console.log(moreDetailedData)
+	generateHTML(moreDetailedData);
+})
 }
 
 function generateHTML(result) {
@@ -80,13 +94,14 @@ function generateHTML(result) {
 			<br>
 			<br>
 			<h3>${result.strMeal}</h3>
-			<button><img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200"></button>
+			<p>${result.strInstructions}</p>
+			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 			<p hidden>${result.idMeal}</p>
 			</div>
 			</div>`
 		});
 	
-	meal_container.innerHTML = newHTML;
+	meal_container.innerHTML += newHTML;
 
 	// let mealId = `${result.idMeal}`
 	// let meal_img = document.getElementById("meal_img");

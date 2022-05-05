@@ -5,11 +5,11 @@ get_meal_btn.addEventListener('click', () => {
 	fetch('https://www.themealdb.com/api/json/v1/1/random.php')
 		.then(res => res.json())
 		.then(res => {
-		createMeal(res.meals[0]);
+		generateRandomMeal(res.meals[0]);
 	});
 });
 
-const createMeal = (meal) => {
+const generateRandomMeal = (meal) => {
 	const ingredients = [];
 	// Get all ingredients from the object. Up to 20
 	for(let i=1; i<=20; i++) {
@@ -70,57 +70,57 @@ searchForm.addEventListener('submit', (event) => {
 	fetchAPI(searchQeury);
 
 });
+
 async function fetchAPI() {
  const baseURL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchQeury}`
  const response = await fetch(baseURL);
  const data = await response.json();
- console.log(data.meals);
  const detailedData = data.meals; 
-//  let meals = [];
 
 	detailedData.map(async meal => {
 	const mealId = meal.idMeal;
 	const nextURL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`;
 	const secondaryResponse = await fetch(nextURL);
 	const moreData = await secondaryResponse.json();
-	console.log(moreData);
 	const moreDetailedData = await moreData.meals;
-	console.log(moreDetailedData)
+	//createMeal(moreDetailedData);
 	generateHTML(moreDetailedData);
-})
+	});
 }
 
 function generateHTML(result) {
 	let newHTML = '';
+	const ingredients = [];
+		// Get all ingredients from the object. Up to 20
+		for(let i=1; i<=20; i++) {
+			if(result[0][`strIngredient${i}`]) {
+				ingredients.push(`${result[0][`strIngredient${i}`]} - ${result[0][`strMeasure${i}`]}`)
+			} else {
+				// Stop if no more ingredients
+				break;
+			}
+		}
+
 	result.map(result  => {
-			newHTML += 
+		newHTML +=
 		`<div class="row">
 			<div class="columns five">
 			<br>
 			<br>
+			${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
 			<h3>${result.strMeal}</h3>
+			<h5>Ingredients:</h5>
+			<ul>
+			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+			</ul>
 			<p>${result.strInstructions}</p>
 			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
-			<p hidden>${result.idMeal}</p>
 			</div>
 			</div>`
 		});
 	
 	meal_container.innerHTML += newHTML;
 
-	// let mealId = `${result.idMeal}`
-	// let meal_img = document.getElementById("meal_img");
-
-	// meal_img.addEventListener('click', (event) => {
-	// event.preventDefault();
-	// fetchNextApi(mealId);
-	// });
-
-	// 	function fetchNextApi() {
-	// 	const fetchNextApi = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`
-	// 	const nextResponse = fetch(fetchNextApi);
-	// 	const dataResponse = nextResponse.json();
-	// 	console.log(dataResponse);
-	// }
 };
-

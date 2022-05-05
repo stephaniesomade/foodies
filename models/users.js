@@ -6,13 +6,16 @@ const UserSchema = new mongoose.Schema ({
       required: true
     },
     email: {
-    type: String, 
-    required: true
+      type: String, 
+      required: true
     }, 
     password:{
-    type: String, 
-    required: true
+      type: String, 
+      required: true
     }, 
+    bookmarks:{ 
+      type: [String]
+    }
   });
 
   const User = mongoose.model("User", UserSchema)

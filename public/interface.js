@@ -1,4 +1,4 @@
-//generate random meal
+/// GENERATE RANDOM MEAL
 const get_meal_btn = document.getElementById('get_meal');
 const meal_container = document.getElementById('meal');
 get_meal_btn.addEventListener('click', () => {
@@ -58,7 +58,7 @@ const generateRandomMeal = (meal) => {
 	meal_container.innerHTML = newInnerHTML + bookmarkHTML;
 }
 
-// filter by ingredient
+// FILTER RECIPES BY MAIN INGREDIENT
 
 const searchForm = document.querySelector('.search_form');
 let serchQuery = '';
@@ -140,4 +140,414 @@ function generateHTML(result) {
 	
 	meal_container.innerHTML += newHTML;
 
+};
+
+// FILTER RECIPES BY POPULAR CUISINE
+
+ const italian_btn = document.getElementById('italian')
+ const chinese_btn = document.getElementById('chinese')
+ const french_btn = document.getElementById('french')
+ const japanese_btn = document.getElementById('japanese')
+ const mexican_btn = document.getElementById('mexican')
+ const thai_btn = document.getElementById('thai')
+ const see_more_btn = document.getElementById('see_more')
+
+ // Italian Cuisine
+
+ italian_btn.addEventListener('click', (event) => {
+	 meal_container.innerHTML = '';
+	 event.preventDefault();
+	 fetchAPIForItalian();
+ })
+
+ async function fetchAPIForItalian() {
+	 const URLItalian = `https://www.themealdb.com/api/json/v1/1/filter.php?a=Italian`;
+	 const responseItalian = await fetch(URLItalian);
+	 const dataForItalian = await responseItalian.json();
+	 detailedDataForItalian = dataForItalian.meals
+
+	 detailedDataForItalian.map(async meal => {
+		const italianMealId = meal.idMeal;
+		const nextURLItalian = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${italianMealId}`;
+		const responseForItalian = await fetch(nextURLItalian);
+		const moredataForItalian = await responseForItalian.json();
+		const moredetailedDataForItalian = await moredataForItalian.meals;
+		generateHTMLforItalian(moredetailedDataForItalian);
+ });
+}
+
+	function generateHTMLforItalian(result) {
+	let newHTML = '';
+	const ingredients = [];
+		// Get all ingredients from the object. Up to 20
+		for(let i=1; i<=20; i++) {
+			if(result[0][`strIngredient${i}`]) {
+				ingredients.push(`${result[0][`strIngredient${i}`]} - ${result[0][`strMeasure${i}`]}`)
+			} else {
+				// Stop if no more ingredients
+				break;
+			}
+		};
+
+	result.map(result  => {
+		newHTML +=
+		`<div class="row">
+			<div class="columns five">
+			<br>
+			<br>
+			<h3>${result.strMeal}</h3>
+			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
+
+			<button onclick="ShowRecipe()"> Show me the Recipe</button>
+
+      <div id="showRecipe" style="display:none">
+
+      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+			<h5>Ingredients:</h5>
+			<ul>
+			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+			</ul>
+			<p>${result.strInstructions}</p>
+
+      </div>
+			
+			</div>
+			</div>`
+		});
+	 meal_container.innerHTML += newHTML;
+};
+// Chinese Cuisine
+
+chinese_btn.addEventListener('click', (event) => {
+	meal_container.innerHTML = '';
+	event.preventDefault();
+	fetchAPIForChinese();
+})
+
+async function fetchAPIForChinese() {
+	const URLChinese = `https://www.themealdb.com/api/json/v1/1/filter.php?a=Chinese`;
+	const responseChinese = await fetch(URLChinese);
+	const dataForChinese = await responseChinese.json();
+	detailedDataForChinese = dataForChinese.meals
+
+	detailedDataForChinese.map(async meal => {
+	 const chineseMealId = meal.idMeal;
+	 const nextURLChinese = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${chineseMealId}`;
+	 const responseForChinese = await fetch(nextURLChinese);
+	 const moredataForChinese = await responseForChinese.json();
+	 const moredetailedDataForChinese = await moredataForChinese.meals;
+	 generateHTMLforChinese(moredetailedDataForChinese);
+});
+}
+
+ function generateHTMLforChinese(result) {
+ let newHTML = '';
+ const ingredients = [];
+	 // Get all ingredients from the object. Up to 20
+	 for(let i=1; i<=20; i++) {
+		 if(result[0][`strIngredient${i}`]) {
+			 ingredients.push(`${result[0][`strIngredient${i}`]} - ${result[0][`strMeasure${i}`]}`)
+		 } else {
+			 // Stop if no more ingredients
+			 break;
+		 }
+	 };
+
+ result.map(result  => {
+	 newHTML +=
+	 `<div class="row">
+		 <div class="columns five">
+		 <br>
+		 <br>
+		 <h3>${result.strMeal}</h3>
+		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
+
+		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+
+		 <div id="showRecipe" style="display:none">
+
+		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+		 <h5>Ingredients:</h5>
+		 <ul>
+		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+		 </ul>
+		 <p>${result.strInstructions}</p>
+
+		 </div>
+		 
+		 </div>
+		 </div>`
+	 });
+	meal_container.innerHTML += newHTML;
+};
+
+// French Cuisine
+
+french_btn.addEventListener('click', (event) => {
+	meal_container.innerHTML = '';
+	event.preventDefault();
+	fetchAPIForFrench();
+})
+
+async function fetchAPIForFrench() {
+	const URLFrench = `https://www.themealdb.com/api/json/v1/1/filter.php?a=French`;
+	const responseFrench = await fetch(URLFrench);
+	const dataForFrench = await responseFrench.json();
+	detailedDataForFrench = dataForFrench.meals
+
+	detailedDataForFrench.map(async meal => {
+	 const frenchMealId = meal.idMeal;
+	 const nextURLFrench = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${frenchMealId}`;
+	 const responseForFrench = await fetch(nextURLFrench);
+	 const moredataForFrench = await responseForFrench.json();
+	 const moredetailedDataForFrench = await moredataForFrench.meals;
+	 generateHTMLforFrench(moredetailedDataForFrench);
+});
+}
+
+ function generateHTMLforFrench(result) {
+ let newHTML = '';
+ const ingredients = [];
+	 // Get all ingredients from the object. Up to 20
+	 for(let i=1; i<=20; i++) {
+		 if(result[0][`strIngredient${i}`]) {
+			 ingredients.push(`${result[0][`strIngredient${i}`]} - ${result[0][`strMeasure${i}`]}`)
+		 } else {
+			 // Stop if no more ingredients
+			 break;
+		 }
+	 };
+
+ result.map(result  => {
+	 newHTML +=
+	 `<div class="row">
+		 <div class="columns five">
+		 <br>
+		 <br>
+		 <h3>${result.strMeal}</h3>
+		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
+
+		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+
+		 <div id="showRecipe" style="display:none">
+
+		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+		 <h5>Ingredients:</h5>
+		 <ul>
+		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+		 </ul>
+		 <p>${result.strInstructions}</p>
+
+		 </div>
+		 
+		 </div>
+		 </div>`
+	 });
+	meal_container.innerHTML += newHTML;
+};
+// Japanese Cuisine
+
+japanese_btn.addEventListener('click', (event) => {
+	meal_container.innerHTML = '';
+	event.preventDefault();
+	fetchAPIForJapanese();
+})
+
+async function fetchAPIForJapanese() {
+	const URLJapanese = `https://www.themealdb.com/api/json/v1/1/filter.php?a=Japanese`;
+	const responseJapanese = await fetch(URLJapanese);
+	const dataForJapanese = await responseJapanese.json();
+	detailedDataForJapanese = dataForJapanese.meals
+
+	detailedDataForJapanese.map(async meal => {
+	 const japaneseMealId = meal.idMeal;
+	 const nextURLJapanese = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${japaneseMealId}`;
+	 const responseForJapanese = await fetch(nextURLJapanese);
+	 const moredataForJapanese = await responseForJapanese.json();
+	 const moredetailedDataForJapanese = await moredataForJapanese.meals;
+	 generateHTMLforJapanese(moredetailedDataForJapanese);
+});
+}
+
+ function generateHTMLforJapanese(result) {
+ let newHTML = '';
+ const ingredients = [];
+	 // Get all ingredients from the object. Up to 20
+	 for(let i=1; i<=20; i++) {
+		 if(result[0][`strIngredient${i}`]) {
+			 ingredients.push(`${result[0][`strIngredient${i}`]} - ${result[0][`strMeasure${i}`]}`)
+		 } else {
+			 // Stop if no more ingredients
+			 break;
+		 }
+	 };
+
+ result.map(result  => {
+	 newHTML +=
+	 `<div class="row">
+		 <div class="columns five">
+		 <br>
+		 <br>
+		 <h3>${result.strMeal}</h3>
+		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
+
+		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+
+		 <div id="showRecipe" style="display:none">
+
+		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+		 <h5>Ingredients:</h5>
+		 <ul>
+		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+		 </ul>
+		 <p>${result.strInstructions}</p>
+
+		 </div>
+		 
+		 </div>
+		 </div>`
+	 });
+	meal_container.innerHTML += newHTML;
+};
+
+// Mexican Cuisine
+
+mexican_btn.addEventListener('click', (event) => {
+	meal_container.innerHTML = '';
+	event.preventDefault();
+	fetchAPIForMexican();
+})
+
+async function fetchAPIForMexican() {
+	const URLMexican = `https://www.themealdb.com/api/json/v1/1/filter.php?a=Mexican`;
+	const responseMexican = await fetch(URLMexican);
+	const dataForMexican = await responseMexican.json();
+	detailedDataForMexican = dataForMexican.meals
+
+	detailedDataForMexican.map(async meal => {
+	 const mexicanMealId = meal.idMeal;
+	 const nextURLMexican = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mexicanMealId}`;
+	 const responseForMexican = await fetch(nextURLMexican);
+	 const moredataForMexican = await responseForMexican.json();
+	 const moredetailedDataForMexican = await moredataForMexican.meals;
+	 generateHTMLforMexican(moredetailedDataForMexican);
+});
+}
+
+ function generateHTMLforMexican(result) {
+ let newHTML = '';
+ const ingredients = [];
+	 // Get all ingredients from the object. Up to 20
+	 for(let i=1; i<=20; i++) {
+		 if(result[0][`strIngredient${i}`]) {
+			 ingredients.push(`${result[0][`strIngredient${i}`]} - ${result[0][`strMeasure${i}`]}`)
+		 } else {
+			 // Stop if no more ingredients
+			 break;
+		 }
+	 };
+
+ result.map(result  => {
+	 newHTML +=
+	 `<div class="row">
+		 <div class="columns five">
+		 <br>
+		 <br>
+		 <h3>${result.strMeal}</h3>
+		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
+
+		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+
+		 <div id="showRecipe" style="display:none">
+
+		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+		 <h5>Ingredients:</h5>
+		 <ul>
+		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+		 </ul>
+		 <p>${result.strInstructions}</p>
+
+		 </div>
+		 
+		 </div>
+		 </div>`
+	 });
+	meal_container.innerHTML += newHTML;
+};
+
+// Thai Cuisine
+
+thai_btn.addEventListener('click', (event) => {
+	meal_container.innerHTML = '';
+	event.preventDefault();
+	fetchAPIForThai();
+})
+
+async function fetchAPIForThai() {
+	const URLThai = `https://www.themealdb.com/api/json/v1/1/filter.php?a=Thai`;
+	const responseThai = await fetch(URLThai);
+	const dataForThai = await responseThai.json();
+	detailedDataForThai = dataForThai.meals
+
+	detailedDataForThai.map(async meal => {
+	 const thaiMealId = meal.idMeal;
+	 const nextURLThai = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${thaiMealId}`;
+	 const responseForThai = await fetch(nextURLThai);
+	 const moredataForThai = await responseForThai.json();
+	 const moredetailedDataForThai = await moredataForThai.meals;
+	 generateHTMLforThai(moredetailedDataForThai);
+});
+}
+
+ function generateHTMLforThai(result) {
+ let newHTML = '';
+ const ingredients = [];
+	 // Get all ingredients from the object. Up to 20
+	 for(let i=1; i<=20; i++) {
+		 if(result[0][`strIngredient${i}`]) {
+			 ingredients.push(`${result[0][`strIngredient${i}`]} - ${result[0][`strMeasure${i}`]}`)
+		 } else {
+			 // Stop if no more ingredients
+			 break;
+		 }
+	 };
+
+ result.map(result  => {
+	 newHTML +=
+	 `<div class="row">
+		 <div class="columns five">
+		 <br>
+		 <br>
+		 <h3>${result.strMeal}</h3>
+		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
+
+		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+
+		 <div id="showRecipe" style="display:none">
+
+		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+		 <h5>Ingredients:</h5>
+		 <ul>
+		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+		 </ul>
+		 <p>${result.strInstructions}</p>
+
+		 </div>
+		 
+		 </div>
+		 </div>`
+	 });
+	meal_container.innerHTML += newHTML;
 };

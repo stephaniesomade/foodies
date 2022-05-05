@@ -14,38 +14,29 @@ const UsersController = {
       res.status(201).redirect("/");
     });
   }, 
-  Profile: (req, res) => { 
-    res.render("users/profile", {name: req.session.user.name, email: req.session.user.email})
+  Profile: async (req, res) => { 
+    const id = await User.find({_id: req.session.user.id}, {bookmarks: 10})
+    const bookmarkArr = id[0].bookmarks
+    const name = req.session.user.name
+    res.render("users/profile", {name: name, email: req.session.user.email})
   },
-  Name: (req, res) => { 
-    const id = req.session.user._id
-    const newName = req.body.name
-    User.updateOne({id: id, name: newName}, (err) => { 
-      if (err) {
-        throw err
-      }
+  Name: async (req, res) => { 
+    const id = await req.session.user._id
+    const newName = await req.body.name
+    const query = await User.findOneAndUpdate({_id: id}, {name: newName})
       res.status(201).redirect("/sessions/new");
-      })
     }, 
-  Email: (req, res) => { 
-    const id = req.session.user._id
-    const email = req.body.email
-    User.updateOne({id: id, email: email}, (err) => { 
-      if(err) { 
-        throw err;
-      }
+  Email: async (req, res) => { 
+    const id = await req.session.user._id
+    const email = await req.body.email
+    const query = await User.findOneAndUpdate({_id: id}, {email: email})
       res.status(201).redirect("/sessions/new");
-    });
   },
-  Bookmarks: (req, res) => {
-    const id = req.session.user._id
-    const meal = req.params.id
-    User.updateOne({id: id, $push: {bookmarks: meal}}, (err) => { 
-      if (err) { 
-        throw err
-      }
+  Bookmarks: async (req, res) => {
+    const id = await req.session.user._id
+    const meal = await req.params.id
+    const query = await User.findOneAndUpdate({_id: id}, {$push: {bookmarks: meal}})
       res.status(201).redirect("/");
-    })
     // Save it to the bookmarks 
   }
 }

@@ -8,5 +8,6 @@ router.post('/', UsersController.Create)
 router.get('/profile', UsersController.Profile)
 router.post('/name', UsersController.Name)
 router.post('/email', UsersController.Email)
+router.post('/bookmarks/:id', UsersController.Bookmarks)
 
 module.exports = router;

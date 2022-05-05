@@ -24,7 +24,7 @@ const UsersController = {
       if (err) {
         throw err
       }
-      res.redirect("/sessions/new")
+      res.status(201).redirect("/sessions/new");
       })
     }, 
   Email: (req, res) => { 
@@ -34,8 +34,19 @@ const UsersController = {
       if(err) { 
         throw err;
       }
-      res.redirect("/sessions/new");
+      res.status(201).redirect("/sessions/new");
     });
+  },
+  Bookmarks: (req, res) => {
+    const id = req.session.user._id
+    const meal = req.params.id
+    User.updateOne({id: id, $push: {bookmarks: meal}}, (err) => { 
+      if (err) { 
+        throw err
+      }
+      res.status(201).redirect("/");
+    })
+    // Save it to the bookmarks 
   }
 }
 

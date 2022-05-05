@@ -351,3 +351,203 @@ async function fetchAPIForFrench() {
 	 });
 	meal_container.innerHTML += newHTML;
 };
+// Japanese Cuisine
+
+japanese_btn.addEventListener('click', (event) => {
+	meal_container.innerHTML = '';
+	event.preventDefault();
+	fetchAPIForJapanese();
+})
+
+async function fetchAPIForJapanese() {
+	const URLJapanese = `https://www.themealdb.com/api/json/v1/1/filter.php?a=Japanese`;
+	const responseJapanese = await fetch(URLJapanese);
+	const dataForJapanese = await responseJapanese.json();
+	detailedDataForJapanese = dataForJapanese.meals
+
+	detailedDataForJapanese.map(async meal => {
+	 const japaneseMealId = meal.idMeal;
+	 const nextURLJapanese = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${japaneseMealId}`;
+	 const responseForJapanese = await fetch(nextURLJapanese);
+	 const moredataForJapanese = await responseForJapanese.json();
+	 const moredetailedDataForJapanese = await moredataForJapanese.meals;
+	 generateHTMLforJapanese(moredetailedDataForJapanese);
+});
+}
+
+ function generateHTMLforJapanese(result) {
+ let newHTML = '';
+ const ingredients = [];
+	 // Get all ingredients from the object. Up to 20
+	 for(let i=1; i<=20; i++) {
+		 if(result[0][`strIngredient${i}`]) {
+			 ingredients.push(`${result[0][`strIngredient${i}`]} - ${result[0][`strMeasure${i}`]}`)
+		 } else {
+			 // Stop if no more ingredients
+			 break;
+		 }
+	 };
+
+ result.map(result  => {
+	 newHTML +=
+	 `<div class="row">
+		 <div class="columns five">
+		 <br>
+		 <br>
+		 <h3>${result.strMeal}</h3>
+		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
+
+		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+
+		 <div id="showRecipe" style="display:none">
+
+		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+		 <h5>Ingredients:</h5>
+		 <ul>
+		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+		 </ul>
+		 <p>${result.strInstructions}</p>
+
+		 </div>
+		 
+		 </div>
+		 </div>`
+	 });
+	meal_container.innerHTML += newHTML;
+};
+
+// Mexican Cuisine
+
+mexican_btn.addEventListener('click', (event) => {
+	meal_container.innerHTML = '';
+	event.preventDefault();
+	fetchAPIForMexican();
+})
+
+async function fetchAPIForMexican() {
+	const URLMexican = `https://www.themealdb.com/api/json/v1/1/filter.php?a=Mexican`;
+	const responseMexican = await fetch(URLMexican);
+	const dataForMexican = await responseMexican.json();
+	detailedDataForMexican = dataForMexican.meals
+
+	detailedDataForMexican.map(async meal => {
+	 const mexicanMealId = meal.idMeal;
+	 const nextURLMexican = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mexicanMealId}`;
+	 const responseForMexican = await fetch(nextURLMexican);
+	 const moredataForMexican = await responseForMexican.json();
+	 const moredetailedDataForMexican = await moredataForMexican.meals;
+	 generateHTMLforMexican(moredetailedDataForMexican);
+});
+}
+
+ function generateHTMLforMexican(result) {
+ let newHTML = '';
+ const ingredients = [];
+	 // Get all ingredients from the object. Up to 20
+	 for(let i=1; i<=20; i++) {
+		 if(result[0][`strIngredient${i}`]) {
+			 ingredients.push(`${result[0][`strIngredient${i}`]} - ${result[0][`strMeasure${i}`]}`)
+		 } else {
+			 // Stop if no more ingredients
+			 break;
+		 }
+	 };
+
+ result.map(result  => {
+	 newHTML +=
+	 `<div class="row">
+		 <div class="columns five">
+		 <br>
+		 <br>
+		 <h3>${result.strMeal}</h3>
+		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
+
+		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+
+		 <div id="showRecipe" style="display:none">
+
+		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+		 <h5>Ingredients:</h5>
+		 <ul>
+		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+		 </ul>
+		 <p>${result.strInstructions}</p>
+
+		 </div>
+		 
+		 </div>
+		 </div>`
+	 });
+	meal_container.innerHTML += newHTML;
+};
+
+// Thai Cuisine
+
+thai_btn.addEventListener('click', (event) => {
+	meal_container.innerHTML = '';
+	event.preventDefault();
+	fetchAPIForThai();
+})
+
+async function fetchAPIForThai() {
+	const URLThai = `https://www.themealdb.com/api/json/v1/1/filter.php?a=Thai`;
+	const responseThai = await fetch(URLThai);
+	const dataForThai = await responseThai.json();
+	detailedDataForThai = dataForThai.meals
+
+	detailedDataForThai.map(async meal => {
+	 const thaiMealId = meal.idMeal;
+	 const nextURLThai = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${thaiMealId}`;
+	 const responseForThai = await fetch(nextURLThai);
+	 const moredataForThai = await responseForThai.json();
+	 const moredetailedDataForThai = await moredataForThai.meals;
+	 generateHTMLforThai(moredetailedDataForThai);
+});
+}
+
+ function generateHTMLforThai(result) {
+ let newHTML = '';
+ const ingredients = [];
+	 // Get all ingredients from the object. Up to 20
+	 for(let i=1; i<=20; i++) {
+		 if(result[0][`strIngredient${i}`]) {
+			 ingredients.push(`${result[0][`strIngredient${i}`]} - ${result[0][`strMeasure${i}`]}`)
+		 } else {
+			 // Stop if no more ingredients
+			 break;
+		 }
+	 };
+
+ result.map(result  => {
+	 newHTML +=
+	 `<div class="row">
+		 <div class="columns five">
+		 <br>
+		 <br>
+		 <h3>${result.strMeal}</h3>
+		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
+
+		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+
+		 <div id="showRecipe" style="display:none">
+
+		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+		 <h5>Ingredients:</h5>
+		 <ul>
+		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+		 </ul>
+		 <p>${result.strInstructions}</p>
+
+		 </div>
+		 
+		 </div>
+		 </div>`
+	 });
+	meal_container.innerHTML += newHTML;
+};

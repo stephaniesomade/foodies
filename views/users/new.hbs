@@ -1,8 +1,19 @@
+<script>
+  function myFunction() {
+  var x = document.getElementById("myInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
 <h4>Register</h4>
 
 <form action="/users" method="post"> 
   <input type="text" placeholder="name" name="name" required pattern=".*\S+.*">
   <input type="email" placeholder="email" name="email" required pattern=".*\S+.*">
-  <input type="text" placeholder="password" name="password" required pattern=".*\S+.*">
+  <input type="password" id="myInput" placeholder="password" name="password" required pattern=".*\S+.*">
+  <input type="checkbox" onclick="myFunction()"> Show Password
   <input type="submit" value="Submit">
 </form>

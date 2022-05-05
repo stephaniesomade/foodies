@@ -41,7 +41,7 @@ const sessionChecker = (req, res, next) => {
 };
 
 // connect to the database
-mongoose.connect('mongodb://127.0.0.1/foodies')
+mongoose.connect('mongodb://127.0.0.1/foodies_test')
 const database = mongoose.connection
 database.on('error', (error) => console.error(error))
 database.once('open', () => console.log("Connected to the Database"))
@@ -62,6 +62,7 @@ const UsersRouter = require("./routes/users")
 
 app.use("/", HomeRouter);
 app.use("/sessions", SessionsRouter);
+app.use("/users/profile", sessionChecker, UsersRouter)
 app.use("/users", UsersRouter);
 
 app.listen(3000, () => console.log("Server is listening on port 3000"))

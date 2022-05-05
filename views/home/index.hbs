@@ -2,25 +2,26 @@
 
 <body>
 
-<div class="container">
-	<div class="row text-center">
-		<h3>
-      Home
-		</h3>
-		<h5>Get a random meal by clicking below</h5>
-		<button class="button-primary" id="get_meal"> Generate Meal </button>
-		<br>
-		<br>
-		<div class="search_container">
-		<form class="search_form">
-			<input style="width: 300px;" type="text" placeholder="Filter by main ingredient">
-			<input type="submit" value="submit">
-		</form>
+	<div class="container">
+		<div class="row text-center">
+			<h3>
+				Home
+			</h3>
+			<h5>Get a random meal by clicking below</h5>
+			<button class="button-primary" id="get_meal"> Generate Meal </button>
+			<br>
+			<br>
+			<div class="search_container">
+				<form class="search_form">
+					<input style="width: 300px;" type="text" placeholder="Filter by main ingredient" required>
+					<input type="submit" value="submit">
+				</form>
+			</div>
 		</div>
-	</div>
-	<div id="meal" class="row meal"></div>
+		<div id="meal" class="row meal"></div>
 
-</div>
-  <script src="interface.js"></script>
+	</div>
+	<script src="interface.js"></script>
 </body>
+
 </html>

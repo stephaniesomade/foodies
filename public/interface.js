@@ -88,6 +88,15 @@ async function fetchAPI() {
 	});
 }
 
+function ShowRecipe() {
+	var Recipe = document.getElementById("showRecipe"),
+		displayValue = "";
+	if (Recipe.style.display == "")
+		displayValue = "none";
+
+	Recipe.style.display = displayValue
+}
+
 function generateHTML(result) {
 	let newHTML = '';
 	const ingredients = [];
@@ -107,16 +116,24 @@ function generateHTML(result) {
 			<div class="columns five">
 			<br>
 			<br>
-			${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+			<h3>${result.strMeal}</h3>
+			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
+
+			<button onclick="ShowRecipe()"> Show me the Recipe</button>
+
+      <div id="showRecipe" style="display:none">
+
+      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
 			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
 			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-			<h3>${result.strMeal}</h3>
 			<h5>Ingredients:</h5>
 			<ul>
 			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
 			</ul>
 			<p>${result.strInstructions}</p>
-			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
+
+      </div>
+			
 			</div>
 			</div>`
 		});

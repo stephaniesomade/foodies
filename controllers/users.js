@@ -14,9 +14,17 @@ const UsersController = {
       res.status(201).redirect("/");
     });
   }, 
+
   Profile: async (req, res) => { 
-    const id = await User.find({_id: req.session.user.id}, {bookmarks: 10})
-    const bookmarkArr = id[0].bookmarks
+    const id = await User.find({_id: req.session.user._id})
+    // const array = id[0].bookmarks
+    // array.forEach(
+    //   element => {
+    //     fetchAPI(`www.themealdb.com/api/json/v1/1/lookup.php?i=${element}`)
+    //     .then(response => response.json())
+    //     .then(data => console.log(data));
+    //   }
+    // )
     const name = req.session.user.name
     res.render("users/profile", {name: name, email: req.session.user.email})
   },
@@ -32,9 +40,12 @@ const UsersController = {
     const query = await User.findOneAndUpdate({_id: id}, {email: email})
       res.status(201).redirect("/sessions/new");
   },
+
   Bookmarks: async (req, res) => {
     const id = await req.session.user._id
     const meal = await req.params.id
+    console.log(meal)
+    console.log(req.session.user._id)
     const query = await User.findOneAndUpdate({_id: id}, {$push: {bookmarks: meal}})
       res.status(201).redirect("/");
     // Save it to the bookmarks 

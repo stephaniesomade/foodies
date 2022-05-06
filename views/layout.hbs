@@ -9,16 +9,15 @@
   <body>
 
     <div class="navbar"> 
-      {{!-- <a href="/"> Home </a>
-      <a href="/posts"> Timeline </a>
+      <a href="/"> Home </a>
+      <a href="/users/profile"> Profile </a>
       <form class="log-in" action='/sessions/new' method='get'></br>
           <input type="submit" value="Log In">
-        </form> --}}
-      <a href="/users/profile"> Profile </a>
+        </form>
         <form action='/sessions?_method=DELETE' method='POST'></br>
           <input type="submit" value="Log Out">
         </form>
-      {{!-- </a> --}}
+
     </div>
     
     {{{body}}}

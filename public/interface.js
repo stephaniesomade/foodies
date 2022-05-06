@@ -151,6 +151,10 @@ function generateHTML(result) {
  const mexican_btn = document.getElementById('mexican')
  const thai_btn = document.getElementById('thai')
  const see_more_btn = document.getElementById('see_more')
+ const american_btn = document.getElementById('american')
+ const greek_btn = document.getElementById('greek')
+ const moroccan_btn = document.getElementById('moroccan')
+ const vietnamese_btn = document.getElementById('vietnamese')
 
  // Italian Cuisine
 
@@ -510,6 +514,273 @@ async function fetchAPIForThai() {
 }
 
  function generateHTMLforThai(result) {
+ let newHTML = '';
+ const ingredients = [];
+	 // Get all ingredients from the object. Up to 20
+	 for(let i=1; i<=20; i++) {
+		 if(result[0][`strIngredient${i}`]) {
+			 ingredients.push(`${result[0][`strIngredient${i}`]} - ${result[0][`strMeasure${i}`]}`)
+		 } else {
+			 // Stop if no more ingredients
+			 break;
+		 }
+	 };
+
+ result.map(result  => {
+	 newHTML +=
+	 `<div class="row">
+		 <div class="columns five">
+		 <br>
+		 <br>
+		 <h3>${result.strMeal}</h3>
+		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
+
+		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+
+		 <div id="showRecipe" style="display:none">
+
+		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+		 <h5>Ingredients:</h5>
+		 <ul>
+		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+		 </ul>
+		 <p>${result.strInstructions}</p>
+
+		 </div>
+		 
+		 </div>
+		 </div>`
+	 });
+	meal_container.innerHTML += newHTML;
+};
+
+///SEE MORE: 
+// American Cuisine
+
+american_btn.addEventListener('click', (event) => {
+	meal_container.innerHTML = '';
+	event.preventDefault();
+	fetchAPIForAmerican();
+})
+
+async function fetchAPIForAmerican() {
+	const URLAmerican = `https://www.themealdb.com/api/json/v1/1/filter.php?a=American`;
+	const responseAmerican = await fetch(URLAmerican);
+	const dataForAmerican = await responseAmerican.json();
+	detailedDataForAmerican = dataForAmerican.meals
+
+	detailedDataForAmerican.map(async meal => {
+	 const americanMealId = meal.idMeal;
+	 const nextURLAmerican= `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${americanMealId}`;
+	 const responseForAmerican = await fetch(nextURLAmerican);
+	 const moredataForAmerican = await responseForAmerican.json();
+	 const moredetailedDataForAmerican = await moredataForAmerican.meals;
+	 generateHTMLforAmerican(moredetailedDataForAmerican);
+});
+}
+
+ function generateHTMLforAmerican(result) {
+ let newHTML = '';
+ const ingredients = [];
+	 // Get all ingredients from the object. Up to 20
+	 for(let i=1; i<=20; i++) {
+		 if(result[0][`strIngredient${i}`]) {
+			 ingredients.push(`${result[0][`strIngredient${i}`]} - ${result[0][`strMeasure${i}`]}`)
+		 } else {
+			 // Stop if no more ingredients
+			 break;
+		 }
+	 };
+
+ result.map(result  => {
+	 newHTML +=
+	 `<div class="row">
+		 <div class="columns five">
+		 <br>
+		 <br>
+		 <h3>${result.strMeal}</h3>
+		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
+
+		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+
+		 <div id="showRecipe" style="display:none">
+
+		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+		 <h5>Ingredients:</h5>
+		 <ul>
+		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+		 </ul>
+		 <p>${result.strInstructions}</p>
+
+		 </div>
+		 
+		 </div>
+		 </div>`
+	 });
+	meal_container.innerHTML += newHTML;
+};
+// Greek Cuisine
+
+greek_btn.addEventListener('click', (event) => {
+	meal_container.innerHTML = '';
+	event.preventDefault();
+	fetchAPIForGreek();
+})
+
+async function fetchAPIForGreek() {
+	const URLGreek = `https://www.themealdb.com/api/json/v1/1/filter.php?a=Greek`;
+	const responseGreek = await fetch(URLGreek);
+	const dataForGreek = await responseGreek.json();
+	detailedDataForGreek = dataForGreek.meals
+
+	detailedDataForGreek.map(async meal => {
+	 const greekMealId = meal.idMeal;
+	 const nextURLGreek= `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${greekMealId}`;
+	 const responseForGreek = await fetch(nextURLGreek);
+	 const moredataForGreek = await responseForGreek.json();
+	 const moredetailedDataForGreek = await moredataForGreek.meals;
+	 generateHTMLforGreek(moredetailedDataForGreek);
+});
+}
+
+ function generateHTMLforGreek(result) {
+ let newHTML = '';
+ const ingredients = [];
+	 // Get all ingredients from the object. Up to 20
+	 for(let i=1; i<=20; i++) {
+		 if(result[0][`strIngredient${i}`]) {
+			 ingredients.push(`${result[0][`strIngredient${i}`]} - ${result[0][`strMeasure${i}`]}`)
+		 } else {
+			 // Stop if no more ingredients
+			 break;
+		 }
+	 };
+
+ result.map(result  => {
+	 newHTML +=
+	 `<div class="row">
+		 <div class="columns five">
+		 <br>
+		 <br>
+		 <h3>${result.strMeal}</h3>
+		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
+
+		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+
+		 <div id="showRecipe" style="display:none">
+
+		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+		 <h5>Ingredients:</h5>
+		 <ul>
+		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+		 </ul>
+		 <p>${result.strInstructions}</p>
+
+		 </div>
+		 
+		 </div>
+		 </div>`
+	 });
+	meal_container.innerHTML += newHTML;
+};
+// Moroccan Cuisine
+
+moroccan_btn.addEventListener('click', (event) => {
+	meal_container.innerHTML = '';
+	event.preventDefault();
+	fetchAPIForMoroccan();
+})
+
+async function fetchAPIForMoroccan() {
+	const URLMoroccan = `https://www.themealdb.com/api/json/v1/1/filter.php?a=Moroccan`;
+	const responseMoroccan = await fetch(URLMoroccan);
+	const dataForMoroccan = await responseMoroccan.json();
+	detailedDataForMoroccan = dataForMoroccan.meals
+
+	detailedDataForMoroccan.map(async meal => {
+	 const moroccanMealId = meal.idMeal;
+	 const nextURLMoroccan = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${moroccanMealId}`;
+	 const responseForMoroccan = await fetch(nextURLMoroccan);
+	 const moredataForMoroccan = await responseForMoroccan.json();
+	 const moredetailedDataForMoroccan = await moredataForMoroccan.meals;
+	 generateHTMLforMoroccan(moredetailedDataForMoroccan);
+});
+}
+
+ function generateHTMLforMoroccan(result) {
+ let newHTML = '';
+ const ingredients = [];
+	 // Get all ingredients from the object. Up to 20
+	 for(let i=1; i<=20; i++) {
+		 if(result[0][`strIngredient${i}`]) {
+			 ingredients.push(`${result[0][`strIngredient${i}`]} - ${result[0][`strMeasure${i}`]}`)
+		 } else {
+			 // Stop if no more ingredients
+			 break;
+		 }
+	 };
+
+ result.map(result  => {
+	 newHTML +=
+	 `<div class="row">
+		 <div class="columns five">
+		 <br>
+		 <br>
+		 <h3>${result.strMeal}</h3>
+		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
+
+		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+
+		 <div id="showRecipe" style="display:none">
+
+		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+		 <h5>Ingredients:</h5>
+		 <ul>
+		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+		 </ul>
+		 <p>${result.strInstructions}</p>
+
+		 </div>
+		 
+		 </div>
+		 </div>`
+	 });
+	meal_container.innerHTML += newHTML;
+};
+
+// Vietnamese Cuisine
+
+vietnamese_btn.addEventListener('click', (event) => {
+	meal_container.innerHTML = '';
+	event.preventDefault();
+	fetchAPIForVietnamese();
+})
+
+async function fetchAPIForVietnamese() {
+	const URLVietnamese = `https://www.themealdb.com/api/json/v1/1/filter.php?a=Vietnamese`;
+	const responseVietnamese = await fetch(URLVietnamese);
+	const dataForVietnamese = await responseVietnamese.json();
+	detailedDataForVietnamese = dataForVietnamese.meals
+
+	detailedDataForVietnamese.map(async meal => {
+	 const vietnameseMealId = meal.idMeal;
+	 const nextURLVietnamese = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${vietnameseMealId}`;
+	 const responseForVietnamese = await fetch(nextURLVietnamese);
+	 const moredataForVietnamese = await responseForVietnamese.json();
+	 const moredetailedDataForVietnamese = await moredataForVietnamese.meals;
+	 generateHTMLforVietnamese(moredetailedDataForVietnamese);
+});
+}
+
+ function generateHTMLforVietnamese(result) {
  let newHTML = '';
  const ingredients = [];
 	 // Get all ingredients from the object. Up to 20

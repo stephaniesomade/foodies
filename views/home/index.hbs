@@ -1,7 +1,28 @@
 <html>
+<style>
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
 
+.dropdown-content {
+	display: none;
+	position: absolute;
+}
+
+.dropdown-content li {
+	display: block;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown:hover .dropbtn {
+	background-color: whitesmoke;
+}
+</style>
 <body>
-
 	<div class="container">
 		<div class="row text-center">
 			<h3>
@@ -16,7 +37,15 @@
 				<li><button id="japanese">Japanese</button></li>
 				<li><button id="mexican">Mexican</button></li>
 				<li><button id="thai">Thai</button></li>
-				<li><button id="see_more">See more</button></li>
+				<div class="dropdown">
+				<li><button class="dropbtn" id="see_more">See more</button></li>
+				<div class="dropdown-content">
+					<li><button id="american">American</button></li>
+					<li><button id="greek">Greek</button></li>
+					<li><button id="moroccan">Moroccan</button></li>
+					<li><button id="vietnamese">Vietnamese</button></li>
+				</div>
+				</div>
 			</ul>
 			</div>
 			<h5>Get a random meal by clicking below</h5>
@@ -25,7 +54,7 @@
 			<br>
 			<div class="search_container">
 				<form class="search_form">
-					<input style="width: 300px;" type="text" placeholder="Filter by main ingredient" required>
+					<input style="width: 300px;" type="text" placeholder="Filter by main ingredient" required pattern=".*\S+.*">
 					<input type="submit" value="submit">
 				</form>
 			</div>

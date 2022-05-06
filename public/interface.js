@@ -822,3 +822,405 @@ async function fetchAPIForVietnamese() {
 	 });
 	meal_container.innerHTML += newHTML;
 };
+
+// Breakfast category
+
+const breakfast_btn = document.getElementById('breakfast')
+breakfast_btn.addEventListener('click', (event) => {
+  meal_container.innerHTML = '';
+  event.preventDefault();
+  fetchAPIForBreakfast();
+})
+
+async function fetchAPIForBreakfast() {
+  const URLBreaskfast = `https://www.themealdb.com/api/json/v1/1/filter.php?c=Breakfast`;
+  const responseBreakfast = await fetch(URLBreaskfast);
+  const dataForBreakfast = await responseBreakfast.json();
+  detailedDataForBreakfast = dataForBreakfast.meals
+  detailedDataForBreakfast.map(async meal => {
+    const breakfastMealId = meal.idMeal;
+    const nextURLBreakfast = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${breakfastMealId}`;
+    const responseForBreakfast = await fetch(nextURLBreakfast);
+    const moredataForBreakfast = await responseForBreakfast.json();
+    const moredetailedDataForBreakfast = await moredataForBreakfast.meals;
+    generateHTMLforBreakfast(moredetailedDataForBreakfast);
+  });
+}
+
+function generateHTMLforBreakfast(result) {
+  let newHTML = '';
+  const ingredients = [];
+  // Get all ingredients from the object. Up to 20
+  for (let i = 1; i <= 20; i++) {
+    if (result[0][`strIngredient${i}`]) {
+      ingredients.push(`${result[0][`strIngredient${i}`]} - ${result[0][`strMeasure${i}`]}`)
+    } else {
+      // Stop if no more ingredients
+      break;
+    }
+  };
+
+  result.map(result => {
+    newHTML +=
+      `<div class="row">
+		 <div class="columns five">
+		 <br>
+		 <br>
+		 <h3>${result.strMeal}</h3>
+		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
+
+		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+
+		 <div id="showRecipe" style="display:none">
+
+		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+		 <h5>Ingredients:</h5>
+		 <ul>
+		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+		 </ul>
+		 <p>${result.strInstructions}</p>
+
+		 </div>
+		 
+		 </div>
+		 </div>`
+  });
+  meal_container.innerHTML += newHTML;
+};
+
+// Dessert category
+
+const dessert_btn = document.getElementById('dessert')
+dessert_btn.addEventListener('click', (event) => {
+  meal_container.innerHTML = '';
+  event.preventDefault();
+  fetchAPIForDessert();
+})
+
+async function fetchAPIForDessert() {
+  const URLDessert = `https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert`;
+  const responseDessert = await fetch(URLDessert);
+  const dataForDessert = await responseDessert.json();
+  detailedDataForDessert = dataForDessert.meals
+  detailedDataForDessert.map(async meal => {
+    const dessertMealId = meal.idMeal;
+    const nextURLDessert = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${dessertMealId}`;
+    const responseForDessert = await fetch(nextURLDessert);
+    const moredataForDessert = await responseForDessert.json();
+    const moredetailedDataForDessert = await moredataForDessert.meals;
+    generateHTMLforDessert(moredetailedDataForDessert);
+  });
+}
+
+function generateHTMLforDessert(result) {
+  let newHTML = '';
+  const ingredients = [];
+  // Get all ingredients from the object. Up to 20
+  for (let i = 1; i <= 20; i++) {
+    if (result[0][`strIngredient${i}`]) {
+      ingredients.push(`${result[0][`strIngredient${i}`]} - ${result[0][`strMeasure${i}`]}`)
+    } else {
+      // Stop if no more ingredients
+      break;
+    }
+  };
+
+  result.map(result => {
+    newHTML +=
+      `<div class="row">
+		 <div class="columns five">
+		 <br>
+		 <br>
+		 <h3>${result.strMeal}</h3>
+		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
+
+		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+
+		 <div id="showRecipe" style="display:none">
+
+		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+		 <h5>Ingredients:</h5>
+		 <ul>
+		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+		 </ul>
+		 <p>${result.strInstructions}</p>
+
+		 </div>
+		 
+		 </div>
+		 </div>`
+  });
+  meal_container.innerHTML += newHTML;
+};
+
+// Starter category
+
+const starter_btn = document.getElementById('starter')
+starter_btn.addEventListener('click', (event) => {
+  meal_container.innerHTML = '';
+  event.preventDefault();
+  fetchAPIForStarter();
+})
+
+async function fetchAPIForStarter() {
+  const URLStarter = `https://www.themealdb.com/api/json/v1/1/filter.php?c=Starter`;
+  const responseStarter = await fetch(URLStarter);
+  const dataForStarter = await responseStarter.json();
+  detailedDataForStarter = dataForStarter.meals
+  detailedDataForStarter.map(async meal => {
+    const starterMealId = meal.idMeal;
+    const nextURLStarter = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${starterMealId}`;
+    const responseForStarter = await fetch(nextURLStarter);
+    const moredataForStarter = await responseForStarter.json();
+    const moredetailedDataForStarter = await moredataForStarter.meals;
+    generateHTMLforStarter(moredetailedDataForStarter);
+  });
+}
+
+function generateHTMLforStarter(result) {
+  let newHTML = '';
+  const ingredients = [];
+  // Get all ingredients from the object. Up to 20
+  for (let i = 1; i <= 20; i++) {
+    if (result[0][`strIngredient${i}`]) {
+      ingredients.push(`${result[0][`strIngredient${i}`]} - ${result[0][`strMeasure${i}`]}`)
+    } else {
+      // Stop if no more ingredients
+      break;
+    }
+  };
+
+  result.map(result => {
+    newHTML +=
+      `<div class="row">
+		 <div class="columns five">
+		 <br>
+		 <br>
+		 <h3>${result.strMeal}</h3>
+		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
+
+		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+
+		 <div id="showRecipe" style="display:none">
+
+		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+		 <h5>Ingredients:</h5>
+		 <ul>
+		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+		 </ul>
+		 <p>${result.strInstructions}</p>
+
+		 </div>
+		 
+		 </div>
+		 </div>`
+  });
+  meal_container.innerHTML += newHTML;
+};
+
+// Side category
+
+const side_btn = document.getElementById('side')
+side_btn.addEventListener('click', (event) => {
+  meal_container.innerHTML = '';
+  event.preventDefault();
+  fetchAPIForSide();
+})
+
+async function fetchAPIForSide() {
+  const URLSide = `https://www.themealdb.com/api/json/v1/1/filter.php?c=Side`;
+  const responseSide = await fetch(URLSide);
+  const dataForSide = await responseSide.json();
+  detailedDataForSide = dataForSide.meals
+  detailedDataForSide.map(async meal => {
+    const sideMealId = meal.idMeal;
+    const nextURLSide = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${sideMealId}`;
+    const responseForSide = await fetch(nextURLSide);
+    const moredataForSide = await responseForSide.json();
+    const moredetailedDataForSide = await moredataForSide.meals;
+    generateHTMLforSide(moredetailedDataForSide);
+  });
+}
+
+function generateHTMLforSide(result) {
+  let newHTML = '';
+  const ingredients = [];
+  // Get all ingredients from the object. Up to 20
+  for (let i = 1; i <= 20; i++) {
+    if (result[0][`strIngredient${i}`]) {
+      ingredients.push(`${result[0][`strIngredient${i}`]} - ${result[0][`strMeasure${i}`]}`)
+    } else {
+      // Stop if no more ingredients
+      break;
+    }
+  };
+
+  result.map(result => {
+    newHTML +=
+      `<div class="row">
+		 <div class="columns five">
+		 <br>
+		 <br>
+		 <h3>${result.strMeal}</h3>
+		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
+
+		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+
+		 <div id="showRecipe" style="display:none">
+
+		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+		 <h5>Ingredients:</h5>
+		 <ul>
+		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+		 </ul>
+		 <p>${result.strInstructions}</p>
+
+		 </div>
+		 
+		 </div>
+		 </div>`
+  });
+  meal_container.innerHTML += newHTML;
+};
+
+// Vegan category
+
+const vegan_btn = document.getElementById('vegan')
+vegan_btn.addEventListener('click', (event) => {
+  meal_container.innerHTML = '';
+  event.preventDefault();
+  fetchAPIForVegan();
+})
+
+async function fetchAPIForVegan() {
+  const URLVegan = `https://www.themealdb.com/api/json/v1/1/filter.php?c=Vegan`;
+  const responseVegan = await fetch(URLVegan);
+  const dataForVegan = await responseVegan.json();
+  detailedDataForVegan = dataForVegan.meals
+  detailedDataForVegan.map(async meal => {
+    const veganMealId = meal.idMeal;
+    const nextURLVegan = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${veganMealId}`;
+    const responseForVegan = await fetch(nextURLVegan);
+    const moredataForVegan = await responseForVegan.json();
+    const moredetailedDataForVegan = await moredataForVegan.meals;
+    generateHTMLforVegan(moredetailedDataForVegan);
+  });
+}
+
+function generateHTMLforVegan(result) {
+  let newHTML = '';
+  const ingredients = [];
+  // Get all ingredients from the object. Up to 20
+  for (let i = 1; i <= 20; i++) {
+    if (result[0][`strIngredient${i}`]) {
+      ingredients.push(`${result[0][`strIngredient${i}`]} - ${result[0][`strMeasure${i}`]}`)
+    } else {
+      // Stop if no more ingredients
+      break;
+    }
+  };
+
+  result.map(result => {
+    newHTML +=
+      `<div class="row">
+		 <div class="columns five">
+		 <br>
+		 <br>
+		 <h3>${result.strMeal}</h3>
+		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
+
+		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+
+		 <div id="showRecipe" style="display:none">
+
+		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+		 <h5>Ingredients:</h5>
+		 <ul>
+		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+		 </ul>
+		 <p>${result.strInstructions}</p>
+
+		 </div>
+		 
+		 </div>
+		 </div>`
+  });
+  meal_container.innerHTML += newHTML;
+};
+
+// Vegetarian category
+
+const vegetarian_btn = document.getElementById('vegetarian')
+vegetarian_btn.addEventListener('click', (event) => {
+  meal_container.innerHTML = '';
+  event.preventDefault();
+  fetchAPIForVegetarian();
+})
+
+async function fetchAPIForVegetarian() {
+  const URLVegetarian = `https://www.themealdb.com/api/json/v1/1/filter.php?c=Vegetarian`;
+  const responseVegetarian = await fetch(URLVegetarian);
+  const dataForVegetarian = await responseVegetarian.json();
+  detailedDataForVegetarian = dataForVegetarian.meals
+  detailedDataForVegetarian.map(async meal => {
+    const vegetarianMealId = meal.idMeal;
+    const nextURLVegetarian = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${vegetarianMealId}`;
+    const responseForVegetarian = await fetch(nextURLVegetarian);
+    const moredataForVegetarian = await responseForVegetarian.json();
+    const moredetailedDataForVegetarian = await moredataForVegetarian.meals;
+    generateHTMLforVegetarian(moredetailedDataForVegetarian);
+  });
+}
+
+function generateHTMLforVegetarian(result) {
+  let newHTML = '';
+  const ingredients = [];
+  // Get all ingredients from the object. Up to 20
+  for (let i = 1; i <= 20; i++) {
+    if (result[0][`strIngredient${i}`]) {
+      ingredients.push(`${result[0][`strIngredient${i}`]} - ${result[0][`strMeasure${i}`]}`)
+    } else {
+      // Stop if no more ingredients
+      break;
+    }
+  };
+
+  result.map(result => {
+    newHTML +=
+      `<div class="row">
+		 <div class="columns five">
+		 <br>
+		 <br>
+		 <h3>${result.strMeal}</h3>
+		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
+
+		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+
+		 <div id="showRecipe" style="display:none">
+
+		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+		 <h5>Ingredients:</h5>
+		 <ul>
+		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+		 </ul>
+		 <p>${result.strInstructions}</p>
+
+		 </div>
+		 
+		 </div>
+		 </div>`
+  });
+  meal_container.innerHTML += newHTML;
+};

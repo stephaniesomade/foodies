@@ -88,8 +88,9 @@ async function fetchAPI() {
 	});
 }
 
-function ShowRecipe() {
-	var Recipe = document.getElementById("showRecipe"),
+function ShowRecipe(event) {
+	console.log(event.target.id)
+	var Recipe = document.getElementById("showRecipe-" + event.target.id),
 		displayValue = "";
 	if (Recipe.style.display == "")
 		displayValue = "none";
@@ -119,10 +120,9 @@ function generateHTML(result) {
 			<h3>${result.strMeal}</h3>
 			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-			<button onclick="ShowRecipe()"> Show me the Recipe</button>
+			<button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
 
-      <div id="showRecipe" style="display:none">
-
+      <div id="showRecipe-${result.idMeal}" style="display:none">
       ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
 			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
 			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
@@ -131,7 +131,6 @@ function generateHTML(result) {
 			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
 			</ul>
 			<p>${result.strInstructions}</p>
-
       </div>
 			
 			</div>
@@ -202,9 +201,9 @@ function generateHTML(result) {
 			<h3>${result.strMeal}</h3>
 			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-			<button onclick="ShowRecipe()"> Show me the Recipe</button>
+			<button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
 
-      <div id="showRecipe" style="display:none">
+      <div id="showRecipe-${result.idMeal}" style="display:none">
 
       ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
 			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
@@ -268,9 +267,9 @@ async function fetchAPIForChinese() {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+			<button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
 
-		 <div id="showRecipe" style="display:none">
+      <div id="showRecipe-${result.idMeal}" style="display:none">
 
 		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
 		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
@@ -335,9 +334,9 @@ async function fetchAPIForFrench() {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
 
-		 <div id="showRecipe" style="display:none">
+      <div id="showRecipe-${result.idMeal}" style="display:none">
 
 		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
 		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
@@ -401,9 +400,9 @@ async function fetchAPIForJapanese() {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
 
-		 <div id="showRecipe" style="display:none">
+      <div id="showRecipe-${result.idMeal}" style="display:none">
 
 		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
 		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
@@ -468,9 +467,9 @@ async function fetchAPIForMexican() {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
 
-		 <div id="showRecipe" style="display:none">
+      <div id="showRecipe-${result.idMeal}" style="display:none">
 
 		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
 		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
@@ -535,9 +534,9 @@ async function fetchAPIForThai() {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
 
-		 <div id="showRecipe" style="display:none">
+      <div id="showRecipe-${result.idMeal}" style="display:none">
 
 		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
 		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
@@ -603,9 +602,9 @@ async function fetchAPIForAmerican() {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
 
-		 <div id="showRecipe" style="display:none">
+      <div id="showRecipe-${result.idMeal}" style="display:none">
 
 		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
 		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
@@ -669,9 +668,9 @@ async function fetchAPIForGreek() {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
 
-		 <div id="showRecipe" style="display:none">
+      <div id="showRecipe-${result.idMeal}" style="display:none">
 
 		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
 		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
@@ -735,9 +734,9 @@ async function fetchAPIForMoroccan() {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
 
-		 <div id="showRecipe" style="display:none">
+      <div id="showRecipe-${result.idMeal}" style="display:none">
 
 		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
 		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
@@ -802,9 +801,9 @@ async function fetchAPIForVietnamese() {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
 
-		 <div id="showRecipe" style="display:none">
+      <div id="showRecipe-${result.idMeal}" style="display:none">
 
 		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
 		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
@@ -869,9 +868,9 @@ function generateHTMLforBreakfast(result) {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
 
-		 <div id="showRecipe" style="display:none">
+      <div id="showRecipe-${result.idMeal}" style="display:none">
 
 		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
 		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
@@ -936,9 +935,9 @@ function generateHTMLforDessert(result) {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
 
-		 <div id="showRecipe" style="display:none">
+      <div id="showRecipe-${result.idMeal}" style="display:none">
 
 		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
 		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
@@ -1003,9 +1002,9 @@ function generateHTMLforStarter(result) {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
 
-		 <div id="showRecipe" style="display:none">
+      <div id="showRecipe-${result.idMeal}" style="display:none">
 
 		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
 		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
@@ -1070,9 +1069,9 @@ function generateHTMLforSide(result) {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
 
-		 <div id="showRecipe" style="display:none">
+      <div id="showRecipe-${result.idMeal}" style="display:none">
 
 		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
 		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
@@ -1137,9 +1136,9 @@ function generateHTMLforVegan(result) {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
 
-		 <div id="showRecipe" style="display:none">
+      <div id="showRecipe-${result.idMeal}" style="display:none">
 
 		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
 		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
@@ -1204,9 +1203,9 @@ function generateHTMLforVegetarian(result) {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe()"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
 
-		 <div id="showRecipe" style="display:none">
+      <div id="showRecipe-${result.idMeal}" style="display:none">
 
 		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
 		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}

@@ -1,13 +1,4 @@
-
-<script type="text/javascript">
-    function showForm() {
-        document.getElementById('formElement').style.display = 'block';
-}
-    function showEmailForm() {
-        document.getElementById('emailElement').style.display = 'block';
-}
-</script>
-
+<body>
 <h1>Profile Page</h1>
 <h4>
   {{name}}
@@ -25,4 +16,87 @@
   <input type="email" id="email" name="email" placeholder="New Email"><br>
   <input type="submit" value="Submit">
 </form>
+
+<button onlick="showBookmarks()" id="bookmarkButton">Show Bookmarks</button>
+<div id="getBookmarks"></div>
+
 </h4>
+</body>
+<script>
+  const bookmark = document.getElementById('bookmarkButton')
+  const container = document.getElementById('getBookmarks')
+
+    function showForm() {
+      document.getElementById('formElement').style.display = 'block';
+}
+    function showEmailForm() {
+        document.getElementById('emailElement').style.display = 'block';
+}
+
+    function ShowRecipe(event) {
+      console.log(event.target.id)
+      var Recipe = document.getElementById("showRecipe-" + event.target.id),
+        displayValue = "";
+      if (Recipe.style.display == "")
+        displayValue = "none";
+
+      Recipe.style.display = displayValue
+    }
+
+    bookmark.addEventListener('click', (event) => {
+      container.innerHTML ='';
+      event.preventDefault();
+      console.log("It reaches the event listener")
+      fetchAPI();
+    });
+
+    async function fetchAPI() {
+      const URL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=52952`
+      const response = await fetch(URL);
+      const data = await response.json();
+      const mealData = data.meals
+      console.log(mealData)
+      generateHTML(mealData);
+      }
+
+       function generateHTML(data) {
+        let newHTML = '';
+        const ingredients = [];
+        // Get all ingredients from the object. Up to 20
+        for(let i=1; i<=20; i++) {
+          if(data[0][`strIngredient${i}`]) {
+            ingredients.push(`${data[0][`strIngredient${i}`]} - ${data[0][`strMeasure${i}`]}`);
+          } else {
+            // Stop if no more ingredients
+            break;
+		      }
+	      }
+
+          data.map(html  => {
+            let newHTML =
+            `<div class="row">
+              <div class="columns five">
+              <br>
+              <br>
+              <h3>${html.strMeal}</h3>
+              <img src="${html.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
+           <button onclick="ShowRecipe(event)" id="${html.idMeal}"> Show me the Recipe</button>
+
+            <div id="showRecipe-${html.idMeal}" style="display:none">
+              ${html.strCategory ? `<p><strong>Category:</strong> ${html.strCategory}</p>` : ''}
+              ${html.strArea ? `<p><strong>Area:</strong> ${html.strArea}</p>` : ''}
+              ${html.strTags ? `<p><strong>Tags:</strong> ${html.strTags.split(',').join(', ')}</p>` : ''}
+              <h5>Ingredients:</h5>
+              <ul>
+              ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+              </ul>
+              <p>${html.strInstructions}</p>
+
+              </div>
+              
+              </div>
+              </div>`;
+            container.innerHTML = newHTML;
+              });
+       }
+</script>

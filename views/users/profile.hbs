@@ -44,30 +44,28 @@
     }
 
     bookmark.addEventListener('click', (event) => {
-      container.innerHTML ='';
       event.preventDefault();
-      console.log("It reaches the event listener")
       fetchAPI();
     });
 
+// API for Bookmarks
     async function fetchAPI() {
-      const URL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=52952`
-      const response = await fetch(URL);
-      const data = await response.json();
-      const mealData = data.meals
-      console.log(mealData)
-      generateHTML(mealData);
-      }
+      {{#each arr}}
+      var URL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i={{this}}`
+      var responseURL = await fetch(URL)
+      var responsejson = await responseURL.json()
+      var mealObj = await responsejson.meals 
+      generateHTML(mealObj)
+       {{/each}}
+      } 
 
        function generateHTML(data) {
         let newHTML = '';
         const ingredients = [];
-        // Get all ingredients from the object. Up to 20
         for(let i=1; i<=20; i++) {
           if(data[0][`strIngredient${i}`]) {
             ingredients.push(`${data[0][`strIngredient${i}`]} - ${data[0][`strMeasure${i}`]}`);
           } else {
-            // Stop if no more ingredients
             break;
 		      }
 	      }
@@ -96,7 +94,7 @@
               
               </div>
               </div>`;
-            container.innerHTML = newHTML;
+            container.innerHTML += newHTML;
               });
        }
 </script>

@@ -168,6 +168,7 @@ function generateHTML(result) {
 	 const responseItalian = await fetch(URLItalian);
 	 const dataForItalian = await responseItalian.json();
 	 detailedDataForItalian = dataForItalian.meals
+	 console.log(dataForItalian)
 
 	 detailedDataForItalian.map(async meal => {
 		const italianMealId = meal.idMeal;

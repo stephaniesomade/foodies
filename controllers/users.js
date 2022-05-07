@@ -18,21 +18,6 @@ const UsersController = {
   Profile: async (req, res) => { 
     const id = await User.find({_id: req.session.user._id})
     const array = id[0].bookmarks
-    // array.forEach(
-    //   element => {
-    //     fetchAPI(`www.themealdb.com/api/json/v1/1/lookup.php?i=${element}`)
-    //     .then(response => response.json())
-    //     .then(data => console.log(data));
-    //   }
-    // )
-
-    // function fetchAPI() { 
-    //   let API = await fetch(URL);
-    //   let result = await API.then( response => 
-    //   response.json()).then(data => console.log(data))
-    //   }
-    //   fetchAPI()
-
     const name = req.session.user.name
     res.render("users/profile", {name: name, email: req.session.user.email, arr: array})
   },

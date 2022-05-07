@@ -93,7 +93,11 @@
               </div>
               
               </div>
-              </div>`;
+              </div>
+              <form action="/users/bookmarks/delete/${html.idMeal}" method="post">
+              <button>Delete Bookmark</button>
+              </form>
+              `;
             container.innerHTML += newHTML;
               });
        }

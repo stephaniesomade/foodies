@@ -72,7 +72,6 @@
             break;
 		      }
 	      }
-
           data.map(html  => {
             let newHTML =
             `<div class="row">
@@ -81,7 +80,7 @@
               <img src="${html.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
            <button onclick="ShowRecipe(event)" id="${html.idMeal}"> Show me the Recipe</button>
             <div id="showRecipe-${html.idMeal}" style="display:none">
-             <h4>Ingredients:</h4>
+             <p>Ingredients:</p>
               <ol>
               ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
               </ol>
@@ -92,6 +91,7 @@
               </div>
               </div>
               </div>
+              <br>
               <form action="/users/bookmarks/delete/${html.idMeal}" method="post">
               <button>Delete Bookmark</button>
               </form>

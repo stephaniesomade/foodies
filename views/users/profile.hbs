@@ -100,7 +100,7 @@
               });
        }
 function download(event) {
- var doc = new jsPDF('l', 'mm', 'letter'); //p - portrait, mm - unit, letter - format
+ var doc = new jsPDF('l', 'mm', 'letter'); //l - landscape, mm - unit, letter - format
   doc.fromHTML(document.getElementById("recipe-" + event.target.id), // page element to be printed as PDF
   5, //margin left
   -2, //margin top

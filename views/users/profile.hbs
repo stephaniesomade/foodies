@@ -77,22 +77,15 @@
             let newHTML =
             `<div class="row">
               <div class="columns five" id="recipe-${html.idMeal}">
-              <br>
-              <br>
               <h3>${html.strMeal}</h3>
-              <img src="${html.strMealThumb}" id="meal_img" alt="Meal Image" width="170" height="170">
+              <img src="${html.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
            <button onclick="ShowRecipe(event)" id="${html.idMeal}"> Show me the Recipe</button>
-
             <div id="showRecipe-${html.idMeal}" style="display:none">
-              ${html.strCategory ? `<p><strong>Category:</strong> ${html.strCategory}</p>` : ''}
-              ${html.strArea ? `<p><strong>Area:</strong> ${html.strArea}</p>` : ''}
-              ${html.strTags ? `<p><strong>Tags:</strong> ${html.strTags.split(',').join(', ')}</p>` : ''}
-              <h5>Ingredients:</h5>
-              <ul>
+             <h4>Ingredients:</h4>
+              <ol>
               ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
-              </ul>
-              <p width="120">${html.strInstructions}</p>
-              
+              </ol>
+              <p>${html.strInstructions}</p>
                <div class='print-recipe'>
               <button onclick="download(event)" id="${html.idMeal}">Download as PDF</button>
               </div>
@@ -107,21 +100,21 @@
               });
        }
 function download(event) {
- var doc = new jsPDF(); //p - portrait, mm - Millimetre, 297- width, 210 - height
-  doc.fromHTML(document.getElementById("recipe-" + event.target.id), // page element which you want to print as PDF
-  20,
-  1, 
+ var doc = new jsPDF('l', 'mm', 'letter'); //p - portrait, mm - unit, letter - format
+  doc.fromHTML(document.getElementById("recipe-" + event.target.id), // page element to be printed as PDF
+  5, //margin left
+  -2, //margin top
   {
-    'width': 140
+    'width': 170
   },
   function(a) 
-   {
-    doc.save("recipe.pdf");
+   { 
+     doc.save("recipe.pdf");
   });
 }
 
-
 </script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js" ></script>
+
+
+

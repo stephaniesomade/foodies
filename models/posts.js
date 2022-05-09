@@ -4,6 +4,9 @@ const PostSchema = new mongoose.Schema ({
     userID: {
       type: String
     },
+    name: { 
+      type: String
+    },
     bookmark: {
       type: String, 
       required: true
@@ -18,6 +21,12 @@ const PostSchema = new mongoose.Schema ({
       default: () => new Date(),
       immutable: true,
     }, 
+    likeCount: { 
+      type: Number,
+    },
+    likes: { 
+      type: [String]
+    },
     comments: { 
       type: [String]
     }

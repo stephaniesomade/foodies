@@ -95,6 +95,12 @@
               
               </div>
               </div>
+              <form action="/posts/${html.strMeal}" method="post">
+              Want to join the conversation? <br> Share your opinions on this recipe with other foodies here! <br>
+              <input name="message" type="text" placeholder="comment">
+              <button type="submit" value="submit">Submit</button>
+              </form>
+
               <form action="/users/bookmarks/delete/${html.idMeal}" method="post">
               <button>Delete Bookmark</button>
               </form>

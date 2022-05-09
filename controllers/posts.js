@@ -8,17 +8,18 @@ const PostsController = {
       if (err) {
         throw err;
       }
-      
-
-      res.render("posts/index", { posts: posts.reverse(), name: posts.name, meal: posts.bookmark });
+      res.render("posts/index", { posts: posts.reverse(), name: posts.name, meal: posts.bookmark, time: posts.createdAt, date: posts.Date});
     });
   },
   New: (req, res) => { 
-    let user = req.session.user._id
     let name = req.session.user.name
     let meal = req.params.meal
     let message = req.body.message
-    const newPost = new Post({name: name, bookmark: meal, message: message})
+    const date = new Date
+    const arr = date.toString().split(" ");
+    let formattedDate = arr[2] + " " + arr[1]+ " " + arr[4]
+    // Formatted Date as opposed to Mongoose's ugly Date format
+    const newPost = new Post({name: name, bookmark: meal, message: message, Date: formattedDate})
     newPost.save((err) => {
       if (err) {
         throw err;
@@ -34,7 +35,7 @@ const PostsController = {
     const meal = req.params.meal
     console.log(req.params.meal)
     const name = await Post.findOneAndUpdate({_id: postID}, { $push: { comments: { "username": username, "comments": message}}})
-      res.status(201).redirect("/posts/index")
+      res.redirect("/posts")
   }
 }
      

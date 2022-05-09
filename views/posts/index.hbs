@@ -3,10 +3,10 @@
 {{#each posts}}
 <br>
 {{this.name}} commented on the {{this.bookmark}}
- recipe:<br>
+ recipe at {{this.Date}}:<br>
 {{this.message}}
 <br>
-{{this.createdAt}}
+Comments: 
 <br>
 {{#each this.comments}}
 {{this.username}} - {{this.comments}}
@@ -19,5 +19,8 @@
 </form>
 <br><br>
 {{/each}}
+
+
+{{time}}
 
 </h5>

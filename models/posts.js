@@ -28,6 +28,10 @@ const PostSchema = new mongoose.Schema ({
     },
     comments: {
       type: [{}]
+    },
+    Date: { 
+      type: String, 
+      immutable: true
     }
   });
 

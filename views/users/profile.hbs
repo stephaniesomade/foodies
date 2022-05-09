@@ -44,6 +44,7 @@
     }
 
     bookmark.addEventListener('click', (event) => {
+      container.innerHTML = ''
       event.preventDefault();
       fetchAPI();
     });

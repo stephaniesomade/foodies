@@ -1,3 +1,4 @@
+<body>
 <h4>Forum</h4>
 <h5>
 {{#each posts}}
@@ -17,10 +18,16 @@ Comments:
   <input name="comment" type="text" placeholder="comment">
   <input type="Submit" value="submit">
 </form>
-<br><br>
+<br>
+<form action="/posts/get/{{this.bookmark}}" method="get">
+  <button id="viewRecipe">View this recipe</button>
+</form>
+<br>
 {{/each}}
 
 
 {{time}}
 
 </h5>
+<script src="interface.js"></script>
+</body>

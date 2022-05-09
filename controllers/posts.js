@@ -36,6 +36,12 @@ const PostsController = {
     console.log(req.params.meal)
     const name = await Post.findOneAndUpdate({_id: postID}, { $push: { comments: { "username": username, "comments": message}}})
       res.redirect("/posts")
+  },
+  View: (req, res) => {
+    const name = req.params.name
+    const newName = name.replace(/ /g,"_")
+    console.log(newName)
+    res.render("posts/recipe", {meal: newName})
   }
 }
      

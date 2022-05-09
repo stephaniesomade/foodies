@@ -134,8 +134,13 @@ function generateHTML(result) {
       </div>
 			
 			</div>
-			</div>`
+			</div> 
+
+			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+				<button id="">Bookmark</button>
+			</form>`
 		});
+
 	
 	meal_container.innerHTML += newHTML;
 
@@ -168,6 +173,7 @@ function generateHTML(result) {
 	 const responseItalian = await fetch(URLItalian);
 	 const dataForItalian = await responseItalian.json();
 	 detailedDataForItalian = dataForItalian.meals
+	 console.log(dataForItalian)
 
 	 detailedDataForItalian.map(async meal => {
 		const italianMealId = meal.idMeal;
@@ -217,7 +223,11 @@ function generateHTML(result) {
       </div>
 			
 			</div>
-			</div>`
+			</div>
+			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+			<button id="">Bookmark</button>
+		</form>`
+
 		});
 	 meal_container.innerHTML += newHTML;
 };
@@ -283,7 +293,10 @@ async function fetchAPIForChinese() {
 		 </div>
 		 
 		 </div>
-		 </div>`
+		 </div>
+		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+			<button id="">Bookmark</button>
+		</form>`
 	 });
 	meal_container.innerHTML += newHTML;
 };
@@ -350,7 +363,10 @@ async function fetchAPIForFrench() {
 		 </div>
 		 
 		 </div>
-		 </div>`
+		 </div>
+		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+			<button id="">Bookmark</button>
+		</form>`
 	 });
 	meal_container.innerHTML += newHTML;
 };
@@ -416,7 +432,10 @@ async function fetchAPIForJapanese() {
 		 </div>
 		 
 		 </div>
-		 </div>`
+		 </div>
+		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+			<button id="">Bookmark</button>
+		</form>`
 	 });
 	meal_container.innerHTML += newHTML;
 };
@@ -483,7 +502,10 @@ async function fetchAPIForMexican() {
 		 </div>
 		 
 		 </div>
-		 </div>`
+		 </div>
+		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+			<button id="">Bookmark</button>
+		</form>`
 	 });
 	meal_container.innerHTML += newHTML;
 };
@@ -550,7 +572,10 @@ async function fetchAPIForThai() {
 		 </div>
 		 
 		 </div>
-		 </div>`
+		 </div>
+		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+			<button id="">Bookmark</button>
+		</form>`
 	 });
 	meal_container.innerHTML += newHTML;
 };
@@ -618,7 +643,10 @@ async function fetchAPIForAmerican() {
 		 </div>
 		 
 		 </div>
-		 </div>`
+		 </div>
+		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+			<button id="">Bookmark</button>
+		</form>`
 	 });
 	meal_container.innerHTML += newHTML;
 };
@@ -684,7 +712,10 @@ async function fetchAPIForGreek() {
 		 </div>
 		 
 		 </div>
-		 </div>`
+		 </div>
+		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+		 <button id="">Bookmark</button>
+	 </form>`
 	 });
 	meal_container.innerHTML += newHTML;
 };
@@ -750,7 +781,11 @@ async function fetchAPIForMoroccan() {
 		 </div>
 		 
 		 </div>
-		 </div>`
+		 </div>
+		 
+		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+			<button id="">Bookmark</button>
+		</form>`
 	 });
 	meal_container.innerHTML += newHTML;
 };
@@ -817,7 +852,10 @@ async function fetchAPIForVietnamese() {
 		 </div>
 		 
 		 </div>
-		 </div>`
+		 </div>
+		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+			<button id="">Bookmark</button>
+		</form>`
 	 });
 	meal_container.innerHTML += newHTML;
 };
@@ -884,7 +922,10 @@ function generateHTMLforBreakfast(result) {
 		 </div>
 		 
 		 </div>
-		 </div>`
+		 </div>
+		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+			<button id="">Bookmark</button>
+		</form>`
   });
   meal_container.innerHTML += newHTML;
 };
@@ -951,7 +992,10 @@ function generateHTMLforDessert(result) {
 		 </div>
 		 
 		 </div>
-		 </div>`
+		 </div>
+		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+			<button id="">Bookmark</button>
+		</form>`
   });
   meal_container.innerHTML += newHTML;
 };
@@ -1018,7 +1062,10 @@ function generateHTMLforStarter(result) {
 		 </div>
 		 
 		 </div>
-		 </div>`
+		 </div>
+		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+			<button id="">Bookmark</button>
+		</form>`
   });
   meal_container.innerHTML += newHTML;
 };
@@ -1085,7 +1132,10 @@ function generateHTMLforSide(result) {
 		 </div>
 		 
 		 </div>
-		 </div>`
+		 </div>
+		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+			<button id="">Bookmark</button>
+		</form>`
   });
   meal_container.innerHTML += newHTML;
 };
@@ -1152,7 +1202,10 @@ function generateHTMLforVegan(result) {
 		 </div>
 		 
 		 </div>
-		 </div>`
+		 </div>
+		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+			<button id="">Bookmark</button>
+		</form>`
   });
   meal_container.innerHTML += newHTML;
 };
@@ -1219,7 +1272,10 @@ function generateHTMLforVegetarian(result) {
 		 </div>
 		 
 		 </div>
-		 </div>`
+		 </div>
+		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+			<button id="">Bookmark</button>
+		</form>`
   });
   meal_container.innerHTML += newHTML;
 };

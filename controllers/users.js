@@ -16,17 +16,11 @@ const UsersController = {
   }, 
 
   Profile: async (req, res) => { 
-    const id = await User.find({_id: req.session.user._id})
-    // const array = id[0].bookmarks
-    // array.forEach(
-    //   element => {
-    //     fetchAPI(`www.themealdb.com/api/json/v1/1/lookup.php?i=${element}`)
-    //     .then(response => response.json())
-    //     .then(data => console.log(data));
-    //   }
-    // )
+    const sessionId = req.session.user._id
+    const id = await User.find({_id: sessionId})
+    const array = id[0].bookmarks
     const name = req.session.user.name
-    res.render("users/profile", {name: name, email: req.session.user.email})
+    res.render("users/profile", {name: name, email: req.session.user.email, arr: array.reverse()})
   },
   Name: async (req, res) => { 
     const id = await req.session.user._id
@@ -44,11 +38,16 @@ const UsersController = {
   Bookmarks: async (req, res) => {
     const id = await req.session.user._id
     const meal = await req.params.id
-    console.log(meal)
-    console.log(req.session.user._id)
     const query = await User.findOneAndUpdate({_id: id}, {$push: {bookmarks: meal}})
       res.status(201).redirect("/");
     // Save it to the bookmarks 
+  },
+
+  Delete: async (req, res) => {
+    const bookmarkid = req.params.id
+    const userId = req.session.user._id
+    const query = await User.updateOne({_id: userId}, {$pull: {bookmarks: bookmarkid}})
+    res.status(201).redirect("/users/profile")
   }
 }
 

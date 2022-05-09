@@ -43,6 +43,12 @@
       Recipe.style.display = displayValue
     }
 
+    function changeRecipeButton(event) {
+        var elem = event.target
+        if (elem.innerText == "Hide Recipe") elem.innerText = "Show Recipe";
+        else elem.innerText = "Hide Recipe";
+      }
+
     bookmark.addEventListener('click', (event) => {
       container.innerHTML = ''
       event.preventDefault();
@@ -79,7 +85,7 @@
               <br>
               <h3>${html.strMeal}</h3>
               <img src="${html.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
-           <button onclick="ShowRecipe(event)" id="${html.idMeal}"> Show me the Recipe</button>
+           <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${html.idMeal}" value="Show Recipe">Show Recipe</button>
 
             <div id="showRecipe-${html.idMeal}" style="display:none">
               ${html.strCategory ? `<p><strong>Category:</strong> ${html.strCategory}</p>` : ''}

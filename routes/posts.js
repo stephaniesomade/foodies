@@ -4,6 +4,7 @@ const router = express.Router();
 const PostsController = require('../controllers/posts')
 
 router.get('/', PostsController.Index)
-router.post('/:meal', PostsController.Comment)
+router.post('/comments/:postid/:meal', PostsController.Comment)
+router.post('/:meal', PostsController.New)
 
 module.exports = router;

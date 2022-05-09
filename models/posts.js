@@ -13,7 +13,6 @@ const PostSchema = new mongoose.Schema ({
     }, 
     message:{
       type: String, 
-      required: true
     }, 
     createdAt: {
       type: Date,
@@ -27,8 +26,8 @@ const PostSchema = new mongoose.Schema ({
     likes: { 
       type: [String]
     },
-    comments: { 
-      type: [String]
+    comments: {
+      type: [{}]
     }
   });
 

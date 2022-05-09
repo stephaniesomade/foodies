@@ -24,6 +24,10 @@ const generateRandomMeal = (meal) => {
 	const newInnerHTML = `
 		<div class="row">
 			<div class="columns five">
+			<br>
+			<br>
+			<h3>${meal.strMeal}</h3>
+ 
 				<img src="${meal.strMealThumb}" alt="Meal Image">
 				
 				${meal.strCategory ? `<p><strong>Category:</strong> ${meal.strCategory}</p>` : ''}

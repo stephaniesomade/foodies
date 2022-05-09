@@ -7,7 +7,17 @@
 {{this.message}}
 <br>
 {{this.createdAt}}
-<br><br><br>
+<br>
+{{#each this.comments}}
+{{this.username}} - {{this.comments}}
+<br>
+{{/each}}
+<br>
+<form action="/posts/comments/{{this._id}}/{{this.bookmark}}" method="post">
+  <input name="comment" type="text" placeholder="comment">
+  <input type="Submit" value="submit">
+</form>
+<br><br>
 {{/each}}
 
 </h5>

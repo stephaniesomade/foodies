@@ -1,72 +1,85 @@
 <html>
 <style>
-.dropdown {
-	position: relative;
-	display: inline-block;
-}
+	.dropdown {
+		position: relative;
+		display: inline-block;
+	}
 
-.dropdown-content {
-	display: none;
-	position: absolute;
-}
+	.dropdown-content {
+		display: none;
+		position: absolute;
+	}
 
-.dropdown-content li {
-	display: block;
-}
+	.dropdown-content li {
+		display: block;
+	}
 
-.dropdown:hover .dropdown-content {
-	display: block;
-}
+	.dropdown:hover .dropdown-content {
+		display: block;
+	}
 
-.dropdown:hover .dropbtn {
-	background-color: whitesmoke;
-}
+	.dropdown:hover .dropbtn {
+		background-color: whitesmoke;
+	}
 </style>
+
 <body>
 	<div class="container">
 		<div class="row text-center">
+
+			<div class="categories">
+				<ul>
+					<li>Categories: </li>
+					<li><button id="breakfast">Breakfast</button></li>
+					<li><button id="dessert">Dessert</button></li>
+					<li><button id="starter">Starter</button></li>
+					<li><button id="side">Side</button></li>
+					<li><button id="vegan">Vegan</button></li>
+					<li><button id="vegetarian">Vegetarian</button></li>
+				</ul>
+			</div>
+			<br>
+			<br>
+			<br>
+
 			<h3>
 				Home
 			</h3>
-			<div>
-			<ul>
-				<li>Popular cuisine: </li>
-				<li><button id="italian">Italian</button></li>
-				<li><button id="chinese">Chinese</button></li>
-				<li><button id="french">French</button></li>
-				<li><button id="japanese">Japanese</button></li>
-				<li><button id="mexican">Mexican</button></li>
-				<li><button id="thai">Thai</button></li>
-				<div class="dropdown">
-				<li><button class="dropbtn" id="see_more">See more</button></li>
-				<div class="dropdown-content">
-					<li><button id="american">American</button></li>
-					<li><button id="greek">Greek</button></li>
-					<li><button id="moroccan">Moroccan</button></li>
-					<li><button id="vietnamese">Vietnamese</button></li>
-				</div>
-				</div>
-			</ul>
-			</div>
+
 			<br>
-			<div class="categories">
+			<div class="popular">
 				<ul>
-				<li>Categories: </li>
-				<li><button id="breakfast">Breakfast</button></li>
-				<li><button id="dessert">Dessert</button></li>
-				<li><button id="starter">Starter</button></li>
-				<li><button id="side">Side</button></li>
-				<li><button id="vegan">Vegan</button></li>
-				<li><button id="vegetarian">Vegetarian</button></li>
+					<li>Popular cuisine: </li>
+					<li><button id="italian">Italian</button></li>
+					<li><button id="chinese">Chinese</button></li>
+					<li><button id="french">French</button></li>
+					<li><button id="japanese">Japanese</button></li>
+					<li><button id="mexican">Mexican</button></li>
+					<li><button id="thai">Thai</button></li>
+					<div class="dropdown">
+						<li><button class="dropbtn" id="see_more">See more</button></li>
+						<div class="dropdown-content">
+							<li><button id="american">American</button></li>
+							<li><button id="greek">Greek</button></li>
+							<li><button id="moroccan">Moroccan</button></li>
+							<li><button id="vietnamese">Vietnamese</button></li>
+						</div>
+					</div>
 				</ul>
 			</div>
+
+			<br>
+
+			<div class="randommeal">
 			<h5>Get a random meal by clicking below</h5>
 			<button class="button-primary" id="get_meal"> Generate Meal </button>
+			</div>
+
 			<br>
 			<br>
 			<div class="search_container">
 				<form class="search_form">
-					<input style="width: 300px;" type="text" placeholder="Filter by main ingredient" required pattern=".*\S+.*">
+					<input id="search" type="text" placeholder="Filter by main ingredient" required pattern=".*\S+.*">
 					<input type="submit" value="submit">
 				</form>
 			</div>

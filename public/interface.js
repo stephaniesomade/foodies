@@ -87,7 +87,6 @@ async function fetchAPI() {
 	const secondaryResponse = await fetch(nextURL);
 	const moreData = await secondaryResponse.json();
 	const moreDetailedData = await moreData.meals;
-	//createMeal(moreDetailedData);
 	generateHTML(moreDetailedData);
 	});
 }
@@ -101,6 +100,13 @@ function ShowRecipe(event) {
 
 	Recipe.style.display = displayValue
 }
+
+function changeRecipeButton(event) {
+	var elem = event.target
+	if (elem.innerText == "Hide Recipe") elem.innerText = "Show Recipe";
+	else elem.innerText = "Hide Recipe";
+}
+
 
 function generateHTML(result) {
 	let newHTML = '';
@@ -124,7 +130,7 @@ function generateHTML(result) {
 			<h3>${result.strMeal}</h3>
 			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-			<button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
+			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
 
       <div id="showRecipe-${result.idMeal}" style="display:none">
       ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
@@ -211,7 +217,7 @@ function generateHTML(result) {
 			<h3>${result.strMeal}</h3>
 			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-			<button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
+			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
 
       <div id="showRecipe-${result.idMeal}" style="display:none">
 
@@ -281,7 +287,7 @@ async function fetchAPIForChinese() {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-			<button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
+			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
 
       <div id="showRecipe-${result.idMeal}" style="display:none">
 
@@ -351,7 +357,7 @@ async function fetchAPIForFrench() {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
 
       <div id="showRecipe-${result.idMeal}" style="display:none">
 
@@ -420,7 +426,7 @@ async function fetchAPIForJapanese() {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
 
       <div id="showRecipe-${result.idMeal}" style="display:none">
 
@@ -490,7 +496,7 @@ async function fetchAPIForMexican() {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
 
       <div id="showRecipe-${result.idMeal}" style="display:none">
 
@@ -560,7 +566,7 @@ async function fetchAPIForThai() {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
 
       <div id="showRecipe-${result.idMeal}" style="display:none">
 
@@ -631,7 +637,7 @@ async function fetchAPIForAmerican() {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
 
       <div id="showRecipe-${result.idMeal}" style="display:none">
 
@@ -700,7 +706,7 @@ async function fetchAPIForGreek() {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
 
       <div id="showRecipe-${result.idMeal}" style="display:none">
 
@@ -769,7 +775,7 @@ async function fetchAPIForMoroccan() {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
 
       <div id="showRecipe-${result.idMeal}" style="display:none">
 
@@ -840,7 +846,7 @@ async function fetchAPIForVietnamese() {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
 
       <div id="showRecipe-${result.idMeal}" style="display:none">
 
@@ -910,7 +916,7 @@ function generateHTMLforBreakfast(result) {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
 
       <div id="showRecipe-${result.idMeal}" style="display:none">
 
@@ -980,7 +986,7 @@ function generateHTMLforDessert(result) {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
 
       <div id="showRecipe-${result.idMeal}" style="display:none">
 
@@ -1050,7 +1056,7 @@ function generateHTMLforStarter(result) {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
 
       <div id="showRecipe-${result.idMeal}" style="display:none">
 
@@ -1120,7 +1126,7 @@ function generateHTMLforSide(result) {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
 
       <div id="showRecipe-${result.idMeal}" style="display:none">
 
@@ -1190,7 +1196,7 @@ function generateHTMLforVegan(result) {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
 
       <div id="showRecipe-${result.idMeal}" style="display:none">
 
@@ -1260,7 +1266,7 @@ function generateHTMLforVegetarian(result) {
 		 <h3>${result.strMeal}</h3>
 		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
 
-		 <button onclick="ShowRecipe(event)" id="${result.idMeal}"> Show me the Recipe</button>
+		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
 
       <div id="showRecipe-${result.idMeal}" style="display:none">
 

@@ -5,7 +5,8 @@ const path = require("path");
 const session = require("express-session");
 const mongoose = require('mongoose');
 var cookieParser = require("cookie-parser");
-var morgan = require("morgan")
+var morgan = require("morgan");
+
 
 app.use(morgan("dev"));
 

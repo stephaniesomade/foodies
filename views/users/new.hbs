@@ -11,9 +11,12 @@
 <h4>Register</h4>
 
 <form action="/users" method="post"> 
-  <input type="text" placeholder="name" name="name" required pattern=".*\S+.*">
-  <input type="email" placeholder="email" name="email" required pattern=".*\S+.*">
+  <label for="name">Name: </label> <br>
+  <input type="text" placeholder="name" name="name" required pattern=".*\S+.*"><br>
+  <label for="email">Email: </label> <br>
+  <input type="email" placeholder="email" name="email" required pattern=".*\S+.*"><br>
+  <label for="password">Password: </label> <br>
   <input type="password" id="myInput" placeholder="password" name="password" required pattern=".*\S+.*">
   <input type="checkbox" onclick="myFunction()"> Show Password
-  <input type="submit" value="Submit">
+  <input id="submit" type="submit" value="Submit" />
 </form>

@@ -1,4 +1,4 @@
-describe("Profile page", () =>{
+describe("Can visit their profile page", () =>{
   it("A user signs in and see their profile page", ()=>{
     // sign in and go to profile page
     cy.visit("/sessions/new?");

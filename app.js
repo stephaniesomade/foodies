@@ -59,13 +59,16 @@ app.use(express.static('public'))
 const HomeRouter = require("./routes/home");
 const SessionsRouter = require("./routes/sessions")
 const UsersRouter = require("./routes/users")
+const PostsRouter = require("./routes/posts")
 
 
-app.use("/", HomeRouter);
-app.use("/sessions", SessionsRouter);
 app.use("/users/profile", sessionChecker, UsersRouter)
 app.use("/users/bookmarks", sessionChecker, UsersRouter)
+app.use("/posts/comment", sessionChecker, PostsRouter);
+app.use("/", HomeRouter);
+app.use("/sessions", SessionsRouter);
 app.use("/users", UsersRouter);
+app.use("/posts", PostsRouter);
 
 app.listen(3000, () => console.log("Server is listening on port 3000"))
 // catch 404 and forward to error handler

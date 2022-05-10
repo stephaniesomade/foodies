@@ -1,0 +1,70 @@
+ <body>
+<h4>Recipe</h4>
+<button><a href="/posts"> Back </a></button>
+<div id="theRecipe"></div>
+
+<script>
+    const container = document.getElementById('theRecipe')
+
+    window.addEventListener('DOMContentLoaded', (event) => {
+      container.innerHTML = ''
+      event.preventDefault();
+      fetchAPI();
+
+    async function fetchAPI() {
+      var URL = "https://www.themealdb.com/api/json/v1/1/search.php?s={{meal}}"
+      var responseURL = await fetch(URL)
+      var responsejson = await responseURL.json()
+      var mealObj = await responsejson.meals 
+      generateHTML(mealObj)
+      } 
+
+       function generateHTML(data) {
+        let newHTML = '';
+        const ingredients = [];
+        for(let i=1; i<=20; i++) {
+          if(data[0][`strIngredient${i}`]) {
+            ingredients.push(`${data[0][`strIngredient${i}`]} - ${data[0][`strMeasure${i}`]}`);
+          } else {
+            break;
+		      }
+	      }
+
+          data.map(html  => {
+            let newHTML =
+            `<div class="row">
+              <div class="columns five">
+              <br>
+              <br>
+              <h3>${html.strMeal}</h3>
+              <img src="${html.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
+              ${html.strCategory ? `<p><strong>Category:</strong> ${html.strCategory}</p>` : ''}
+              ${html.strArea ? `<p><strong>Area:</strong> ${html.strArea}</p>` : ''}
+              ${html.strTags ? `<p><strong>Tags:</strong> ${html.strTags.split(',').join(', ')}</p>` : ''}
+              <h5>Ingredients:</h5>
+              <ul>
+              ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+              </ul>
+              <p>${html.strInstructions}</p>
+
+              </div>
+              
+              </div>
+              </div>
+              <form action="/posts/${html.strMeal}" method="post">
+              Want to join the conversation? <br> Share your opinions on this recipe with other foodies here! <br>
+              <input name="message" type="text" placeholder="comment">
+              <button type="submit" value="submit">Submit</button>
+              </form>
+
+             			<form action="/users/bookmarks/${html.idMeal}" id="bookmarks" method="post">
+              <button id="">Bookmark</button>
+            </form>`
+
+            container.innerHTML += newHTML;
+              });
+       }
+  })
+
+</script>
+</body>

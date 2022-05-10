@@ -1,0 +1,29 @@
+<body>
+<h4>Forum</h4>
+<h5>
+{{#each posts}}
+<br>
+{{this.name}} commented on the <form action="/posts/get/{{this.bookmark}}" method="get"><a href="posts/get/{{this.bookmark}}">{{this.bookmark}}</a></form>
+ recipe at {{this.Date}}:<br>
+{{this.message}}
+<br>
+Comments: 
+<br>
+{{#each this.comments}}
+{{this.username}} - {{this.comments}}
+<br>
+{{/each}}
+<br>
+<form action="/posts/comments/{{this._id}}/{{this.bookmark}}" method="post">
+  <input name="comment" type="text" placeholder="comment">
+  <input type="Submit" value="submit">
+</form>
+<br>
+<br>
+{{/each}}
+
+
+{{time}}
+
+</h5>
+</body>

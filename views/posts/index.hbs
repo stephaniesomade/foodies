@@ -3,7 +3,7 @@
 <h5>
 {{#each posts}}
 <br>
-{{this.name}} commented on the {{this.bookmark}}
+{{this.name}} commented on the <form action="/posts/get/{{this.bookmark}}" method="get"><a href="posts/get/{{this.bookmark}}">{{this.bookmark}}</a></form>
  recipe at {{this.Date}}:<br>
 {{this.message}}
 <br>
@@ -19,9 +19,6 @@ Comments:
   <input type="Submit" value="submit">
 </form>
 <br>
-<form action="/posts/get/{{this.bookmark}}" method="get">
-  <button id="viewRecipe">View this recipe</button>
-</form>
 <br>
 {{/each}}
 
@@ -29,5 +26,4 @@ Comments:
 {{time}}
 
 </h5>
-<script src="interface.js"></script>
 </body>

@@ -1,14 +1,12 @@
  <body>
 <h4>Recipe</h4>
-
-<button id="recipe">View Recipe</button>
+<button><a href="/posts"> Back </a></button>
 <div id="theRecipe"></div>
 
 <script>
     const container = document.getElementById('theRecipe')
-  const view = document.getElementById('recipe')
 
-  view.addEventListener('click', (event) => {
+    window.addEventListener('DOMContentLoaded', (event) => {
       container.innerHTML = ''
       event.preventDefault();
       fetchAPI();

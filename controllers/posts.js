@@ -1,6 +1,5 @@
 const User = require("../models/users")
 const Post = require("../models/posts")
-const Comment = require("../models/comments")
 
 const PostsController = {
   Index: (req, res) => { 
@@ -24,7 +23,7 @@ const PostsController = {
       if (err) {
         throw err;
       }
-    res.status(201).redirect("/")
+    res.status(201).redirect("/users/profile")
    });
   },
   Comment: async (req, res) => {

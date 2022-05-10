@@ -72,6 +72,7 @@ h3 {
   list-style: none;
   display: flex;
   justify-content: center;
+  font-weight: bold;
 }
 
 .category-btn li {
@@ -79,18 +80,17 @@ h3 {
 }
 
 #breakfast, #dessert, #starter, #side, #vegan, #vegetarian {
-  font-weight: bold;
   border-radius: 60px;
   padding: 12px;
   text-align: center;
   cursor: pointer;
+  -webkit-text-stroke: 1.5px white;
 }
 
 .fa-bacon, .fa-ice-cream, .fa-bowl-rice, 
 .fa-shrimp, .fa-seedling,
 .fa-pepper-hot {
   color: red;
-  -webkit-text-stroke: 1px white;
   font-size: 30px;
 }
 
@@ -98,6 +98,20 @@ h3 {
   color: black;
   margin-top: 10px;
   font-size: 18px;
+}
+
+.fa-bacon:hover, .fa-ice-cream:hover, .fa-bowl-rice:hover, 
+.fa-shrimp:hover, .fa-seedling:hover,
+.fa-pepper-hot:hover {
+  color: black;
+}
+.category-items:hover {
+  color: red;
+}
+
+#breakfast:hover, #dessert:hover, #starter:hover, 
+#side:hover, #vegan:hover, #vegetarian:hover {
+  -webkit-text-stroke: 1px white;
 }
 
 .randommeal {

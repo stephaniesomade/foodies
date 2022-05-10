@@ -1,3 +1,5 @@
+<head>
+</head>
 <body>
 <h1>Profile Page</h1>
 <h4>
@@ -76,31 +78,28 @@
             break;
 		      }
 	      }
-
           data.map(html  => {
             let newHTML =
             `<div class="row">
-              <div class="columns five">
-              <br>
-              <br>
+              <div class="columns five" id="recipe-${html.idMeal}">
               <h3>${html.strMeal}</h3>
               <img src="${html.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
+              
            <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${html.idMeal}" value="Show Recipe">Show Recipe</button>
 
             <div id="showRecipe-${html.idMeal}" style="display:none">
-              ${html.strCategory ? `<p><strong>Category:</strong> ${html.strCategory}</p>` : ''}
-              ${html.strArea ? `<p><strong>Area:</strong> ${html.strArea}</p>` : ''}
-              ${html.strTags ? `<p><strong>Tags:</strong> ${html.strTags.split(',').join(', ')}</p>` : ''}
-              <h5>Ingredients:</h5>
-              <ul>
+             <p>Ingredients:</p>
+              <ol>
               ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
-              </ul>
+              </ol>
               <p>${html.strInstructions}</p>
-
+               <div class='print-recipe'>
+              <button onclick="download(event)" id="${html.idMeal}">Download as PDF</button>
               </div>
-              
               </div>
               </div>
+              </div>
+              <br>
               <form action="/users/bookmarks/delete/${html.idMeal}" method="post">
               <button>Delete Bookmark</button>
               </form>
@@ -108,4 +107,22 @@
             container.innerHTML += newHTML;
               });
        }
+function download(event) {
+ var doc = new jsPDF('l', 'mm', 'letter'); //l - landscape, mm - unit, letter - format
+  doc.fromHTML(document.getElementById("recipe-" + event.target.id), // page element to be printed as PDF
+  5, //margin left
+  -2, //margin top
+  {
+    'width': 170
+  },
+  function(a) 
+   { 
+     doc.save("recipe.pdf");
+  });
+}
+
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js" ></script>
+
+
+

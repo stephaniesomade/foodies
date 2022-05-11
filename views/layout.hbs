@@ -18,15 +18,16 @@
       {{#if user}}
     <div class="navbar"> 
       <a class="navbar-item"><form action='/sessions?_method=DELETE' method='POST'>
-        <input type="submit" value="Log Out" id="log_out">
+        <input type="submit" value="Log out" id="log_out">
       </form></a>
       <a href="/users/profile" class="navbar-item">Profile</a>
       <a href="/posts" class="navbar-item">Forum</a>
     </div>
         {{else}}
-        <div class="navbar"> 
+        <div class="navbar">
+          <a href="/" class="navbar-item">Home</a>
         <a class="navbar-item"><form class="log-in" action='/sessions/new' method='get'>
-          <input type="submit" value="Log In" id="log_in">
+          <input type="submit" value="Log in" id="log_in">
         </form></a>
         <a href="/users/new" class="navbar-item">Sign up</a>
     </div>

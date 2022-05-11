@@ -20,7 +20,7 @@ const UsersController = {
     const id = await User.find({_id: sessionId})
     const array = id[0].bookmarks
     const name = req.session.user.name
-    res.render("users/profile", {title: "Profile page" , name: name, email: req.session.user.email, arr: array.reverse()})
+    res.render("users/profile", {title: "Profile page" , user: req.session.user, name: name, email: req.session.user.email, arr: array.reverse()})
   },
   Name: async (req, res) => { 
     const id = await req.session.user._id

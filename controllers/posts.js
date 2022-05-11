@@ -34,7 +34,7 @@ const PostsController = {
     const meal = req.params.meal
     console.log(req.params.meal)
     const name = await Post.findOneAndUpdate({_id: postID}, { $push: { comments: { "username": username, "comments": message}}})
-    res.redirect("/posts", { user: req.session.user })
+    res.redirect("/posts")
   },
   View: (req, res) => {
     const name = req.params.name

@@ -1,29 +1,75 @@
+
 <body>
-<h4>Forum</h4>
-<h5>
-{{#each posts}}
-<br>
-{{this.name}} commented on the <form action="/posts/get/{{this.bookmark}}" method="get"><a href="posts/get/{{this.bookmark}}">{{this.bookmark}}</a></form>
- recipe at {{this.Date}}:<br>
-{{this.message}}
-<br>
-Comments: 
-<br>
-{{#each this.comments}}
-{{this.username}} - {{this.comments}}
-<br>
-{{/each}}
-<br>
-<form action="/posts/comments/{{this._id}}/{{this.bookmark}}" method="post">
-  <input name="comment" type="text" placeholder="comment">
-  <input type="Submit" value="submit">
-</form>
-<br>
-<br>
-{{/each}}
+  <h4>The Foodies Forum</h4>
+  <h5>
+    
+    {{!-- MyCODE --}}
+    {{#each posts}}
+     <div class="detailBox">
+    {{!-- The original post --}}
 
+    <div class="forum">
+         <div class="titleBox">
+     <form action="/posts/get/{{this.bookmark}}" method="get"></form>
+     <div class="tooltip">{{this.bookmark}}<span class="tooltiptext"><a href="posts/get/{{this.bookmark}}"><p>View Recipe</p></span></div></a>
+    <br><br>{{this.name}} <div style="text-align: right;">[{{this.Date}}]</div>
+    </div>
+        <div class="commentBox" style="text-align:center;">
+         {{this.message}}<br><br>
 
-{{time}}
+    </form>
+    </div>
+    {{!-- The comment section --}}
 
-</h5>
+    <div class="forum"> &nbsp  Comments:</div>
+    <div class="actionBox">
+    {{#each this.comments}}
+     <div class="forum">
+       <ul class="commentList">
+            <li>
+   {{this.comments}}</li>
+    <span class="date sub-text">{{this.username}}</span>
+    </div>
+    {{/each}}
+    </div>
+    </div>
+    
+    {{!-- The comment bar --}}
+    <div style="margin: auto; text-align:center">
+    <form action="/posts/comments/{{this._id}}/{{this.bookmark}}" method="post">
+        <input name="comment" type="text" placeholder="comment" id="comment-box" class="comment-bar">
+      <input type="Submit" value="submit">
+    </form>
+    </div>
+    </div>
+    <br>
+    <br>
+    {{/each}}
+    </div>
+   </div>
+ 
+  <button onclick="topFunction()" id="myBtn" title="Go to top">Back to the top</button>
+
+  <script>
+    var mybutton = document.getElementById("myBtn");
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+
+// When the user clicks on the button, scroll back to the top of the document
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+   // window.scrollTo(0, document.body.scrollHeight)
+  </script>
 </body>
+
+
+

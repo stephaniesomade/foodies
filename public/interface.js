@@ -145,10 +145,11 @@ function generateHTML(result) {
 			
 			</div>
 			</div> 
-
+			
 			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
 				<button id="">Bookmark</button>
-			</form>`
+			</form>
+			`
 		});
 
 	
@@ -229,11 +230,12 @@ function generateHTML(result) {
 			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
 			</ul>
 			<p>${result.strInstructions}</p>
-
+			
       </div>
 			
 			</div>
 			</div>
+			
 			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
 			<button id="">Bookmark</button>
 		</form>`

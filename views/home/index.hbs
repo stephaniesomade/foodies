@@ -1,31 +1,10 @@
 <html>
 <style>
-	.dropdown {
-		position: relative;
-		display: inline-block;
-	}
-
-	.dropdown-content {
-		display: none;
-		position: absolute;
-	}
-
-	.dropdown-content li {
-		display: block;
-	}
-
-	.dropdown:hover .dropdown-content {
-		display: block;
-	}
-
-	.dropdown:hover .dropbtn {
-		background-color: whitesmoke;
-	}
 </style>
-
 <body>
+	<!-- body container -->
 	<div class="container">
-		<div class="row text-center">
+	<!-- categories container -->
 			<div class="categories">
 				<ul class="category-btn">
 					<li><a id="breakfast"><i class="fa-solid fa-bacon">
@@ -42,18 +21,10 @@
 						<div class="category-items">Vegetarian</div></i></a></li>
 				</ul>
 			</div>
-			<br>
-			<br>
-			<br>
-
-			<h3>
-				Home
-			</h3>
-
-			<br>
+			<!-- popular categories container -->
 			<div class="popular">
-				<ul>
-					<li>Popular cuisine: </li>
+				<ul class="popular-by-area">
+					<li><h5><i class="fa-solid">popular</h5></i></li>
 					<li><button id="italian">Italian</button></li>
 					<li><button id="chinese">Chinese</button></li>
 					<li><button id="french">French</button></li>
@@ -61,7 +32,7 @@
 					<li><button id="mexican">Mexican</button></li>
 					<li><button id="thai">Thai</button></li>
 					<div class="dropdown">
-						<li><button class="dropbtn" id="see_more">See more</button></li>
+						<li><button class="dropbtn" id="see_more"><i class="fa-solid fa-angle-down"></i></button></li>
 						<div class="dropdown-content">
 							<li><button id="american">American</button></li>
 							<li><button id="greek">Greek</button></li>
@@ -71,24 +42,24 @@
 					</div>
 				</ul>
 			</div>
-
-			<br>
-
-			<div class="randommeal">
-			<h5>Get a random meal by clicking below</h5>
-			<button class="button-primary" id="get_meal"> Generate Meal </button>
-			</div>
-
-			<br>
-			<br>
+			<!-- span starts -->
+	<span id="options_container">
+		<!-- filter by ingredient container -->
 			<div class="search_container">
 				<form class="search_form">
-					<input id="search" type="text" placeholder="Filter by main ingredient" required pattern=".*\S+.*">
-					<input type="submit" value="submit">
+					<input id="search" type="text" placeholder="Filter meals by ingredient" required pattern=".*\S+.*">
+					<input type="submit" value="Submit" id="submit-btn">
 				</form>
+				
 			</div>
-		</div>
-
+			<h4> OR </h4>
+	<!-- generate random meal container -->
+			<div class="randommeal">
+			<button class="button-primary" id="get_meal"> Generate Random Meal </button>
+			</div>
+			<!-- span ends -->
+			</span>
+		<!-- results container -->
 		<div id="meal" class="row meal"></div>
 
 	</div>

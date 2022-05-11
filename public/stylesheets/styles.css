@@ -1,6 +1,5 @@
 body {
   font-family: 'Josefin Sans', sans-serif;
-  padding: 20px;
   font: 14px;
   background-color: white;
   color: black;
@@ -8,14 +7,27 @@ body {
   display: flex;
   flex-direction: column;
 }
+header {
+  background-color: white;
+  color: red;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
 
 .navbar {
   background-color: white;
   width: 100%;
   height: 40px;
   display: flex;
-  justify-content: flex-start;
-  padding: 10px;
+  justify-content: center;
 }
 
 .navbar a {
@@ -59,38 +71,14 @@ body {
 color: red;
 }
 
-header {
-  background-color: white;
-  color: red;
-  width: 100%;
-  height: 150px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  overflow: hidden;
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-h3 {
-  color: white;
-}
-
-.popular {
-  background-color: white;
-  float: right;
-  border-color: black;
-  border-radius: 5px;
-}
-
 .categories {
   color: black;
   width: 100%;
   height: 80px;
   margin-top: 10px;
-  padding: 10px;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
 
 }
 .category-btn {
@@ -136,25 +124,141 @@ h3 {
   -webkit-text-stroke: 1px white;
 }
 
+h3 {
+  color: black;
+  justify-content: center;
+  font-size: 25px;
+}
+
+#options_container {
+  background-color: 0 0  0 2px rgb(255,255,255);
+  display: flex;
+  justify-content: center;
+  margin-left: 130px;
+}
+
 .randommeal {
+  justify-content: center;
   background-color: white;
-  margin: 0 auto;
   text-align: center;
+  padding: 20px;
+}
+
+h4 {
+  font-size: 20px;
+  font-weight: lighter;
+}
+
+#get_meal {
+  font-weight: bolder;
+  padding: 5px;
+  box-shadow:
+       inset 0 -3em 3em rgba(0,0,0,0.1),
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
 }
 
 .search_container {
+  justify-content: center;
   background-color: white;
-  margin: 0 auto;
   text-align: center;
+  padding: 20px;
 }
 
 #search {
+  color: black;
+  font-weight: bold;
   width: 300px;
+  text-align: center;
+  padding: 5px;
+  box-shadow:
+       inset 0 -3em 3em rgba(0,0,0,0.1),
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
 }
 
-.sign-in{
+#submit-btn {
+  padding: 5px;
+  box-shadow:
+       inset 0 -3em 3em rgba(0,0,0,0.1),
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
+}
+
+.popular {
   background-color: white;
-  margin: 0 auto;
+  float: right;
+  border-color: black;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: -10px;
+}
+
+.popular-by-area {
+  list-style: none;
+  padding: 0;
+  justify-content: center;
+}
+
+.popular-by-area li {
+  padding-top: 15px;
+  align-items: center;
+}
+
+h5 {
+  color: black;
+  font-size: 18px;
+  text-align: center;
+  letter-spacing: 4px;
+  padding-bottom: -10px;
+}
+#italian, #chinese, #french, #japanese, 
+#mexican, #thai, #see_more {
+  font-weight: bold;
+  padding: 5px;
+}
+
+#italian, #chinese, #french, #japanese, 
+#mexican, #thai, #american, #greek,
+#moroccan, #vietnamese, #see_more {
+  text-transform: uppercase;
+  width: 120px;
+  box-shadow:
+       inset 0 -3em 3em rgba(0,0,0,0.1),
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
+}
+
+#italian:hover, #chinese:hover, #french:hover, #japanese:hover, 
+#mexican:hover, #thai:hover {
+  color: white;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+}
+
+.dropdown-content li {
+  display: block;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: whitesmoke;
+}
+
+.sign-in {
+  background-color: white;
+  margin: 50px auto;
   text-align: center;
   padding: 20px;
   box-shadow:
@@ -163,7 +267,7 @@ h3 {
              0.3em 0.3em 1em rgba(0,0,0,0.3);
 }
 
-.register{
+.register {
   background-color: white;
   margin: 0 auto;
   text-align: right;

@@ -8,15 +8,17 @@
   }
 }
 </script>
-<h4>Register</h4>
+<h3>Register</h3>
 
-<form action="/users" method="post"> 
-  <label for="name">Name: </label> <br>
-  <input type="text" placeholder="name" name="name" required pattern=".*\S+.*"><br>
-  <label for="email">Email: </label> <br>
-  <input type="email" placeholder="email" name="email" required pattern=".*\S+.*"><br>
-  <label for="password">Password: </label> <br>
-  <input type="password" id="myInput" placeholder="password" name="password" required pattern=".*\S+.*">
-  <input type="checkbox" onclick="myFunction()"> Show Password
-  <input id="submit" type="submit" value="Submit" />
-</form>
+<div class="register">
+  <form action="/users" method="post"> 
+    <label for="name">Name: </label> 
+    <input type="text" placeholder="name" name="name" required pattern=".*\S+.*"><br>
+    <label for="email">Email: </label> 
+    <input type="email" placeholder="email" name="email" required pattern=".*\S+.*"><br>
+    <label for="password">Password: </label> 
+    <input type="password" id="myInput" placeholder="password" name="password" required pattern=".*\S+.*"><br><br>
+    <input type="checkbox" onclick="myFunction()"> Show Password
+    <input id="submit" type="submit" value="Submit" />
+  </form>
+</div>

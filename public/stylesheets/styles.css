@@ -100,3 +100,16 @@ h3 {
 #search {
   width: 300px;
 }
+
+.sign-in{
+  background-color: lightgrey;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.register{
+  background-color: lightgray;
+  margin: 0 auto;
+  text-align: center;
+}
+

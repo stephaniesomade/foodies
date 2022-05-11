@@ -15,14 +15,16 @@
     <br><br>{{this.name}} <div style="text-align: right;">[{{this.Date}}]</div>
     </div>
         <div class="commentBox" style="text-align:center;">
+          <br>
          {{this.message}}<br><br>
 
     </form>
     </div>
     {{!-- The comment section --}}
 
-    <div class="forum"> &nbsp  Comments:</div>
+    <div class="forum"></div>
     <div class="actionBox">
+    Comments:
     {{#each this.comments}}
      <div class="forum">
        <ul class="commentList">
@@ -40,6 +42,7 @@
         <input name="comment"  type="text" placeholder="comment" id="comment-box" class="comment-bar" required pattern=".*\S+.*">
       <input type="Submit"  id="submit-btn"value="submit">
     </form>
+      <br>
     </div>
     </div>
     <br>

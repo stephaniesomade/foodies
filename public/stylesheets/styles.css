@@ -217,7 +217,7 @@ h4 {
   visibility: hidden;
   width: 100px;
   height: 40px;
-  background-color: pink;
+  background-color: red;
   color: black;
   text-align: center;
   border-radius: 20px;
@@ -318,7 +318,7 @@ a:active { text-decoration: none; }
     margin:0;
 }
 .sub-text {
-    color:#aaa;
+    color:red;
     font-family:verdana;
     font-size:11px;
 }
@@ -326,6 +326,21 @@ a:active { text-decoration: none; }
     border-top:1px dotted #bbb;
     padding:10px;
 }
+
+.h5 { 
+  color: black;
+  font-size: 14px;
+  text-align: left;
+  letter-spacing: 1px;
+  padding-bottom: -10px;
+
+}
+/* end of forum styling */
+
+#search {
+  color: black;
+  font-weight: bold;
+  width: 300px;
   text-align: center;
   padding: 5px;
   box-shadow:

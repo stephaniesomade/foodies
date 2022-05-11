@@ -1,9 +1,23 @@
  <body>
-<h4>Recipe</h4>
-<button><a href="/posts"> Back </a></button>
+
+<form action="/posts" method="get">
+<button id="submit-btn"> Back </a></button>
+</form>
 <div id="theRecipe"></div>
+  <button onclick="topFunction()" id="myBtn" title="Go to top">Back to the top</button>
 
 <script>
+    var mybutton = document.getElementById("myBtn");
+    window.onscroll = function() {scrollFunction()};
+
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
     const container = document.getElementById('theRecipe')
 
     window.addEventListener('DOMContentLoaded', (event) => {
@@ -53,12 +67,12 @@
               </div>
               <form action="/posts/${html.strMeal}" method="post">
               Want to join the conversation? <br> Share your opinions on this recipe with other foodies here! <br>
-              <input name="message" type="text" placeholder="comment">
-              <button type="submit" value="submit">Submit</button>
+              <input name="message" type="text" placeholder="comment" id="comment-box" class="comment-bar" required pattern=".*\S+.*" >
+              <button type="submit" value="submit" id="submit-btn">Submit</button>
               </form>
-
+              <br>
              			<form action="/users/bookmarks/${html.idMeal}" id="bookmarks" method="post">
-              <button id="">Bookmark</button>
+              <button id="submit-btn">Bookmark</button>
             </form>`
 
             container.innerHTML += newHTML;

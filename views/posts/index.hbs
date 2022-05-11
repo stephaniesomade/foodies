@@ -1,7 +1,7 @@
 
 <body>
   <h4>The Foodies Forum</h4>
-  <h5>
+  <h5 class="h5">
     
     {{!-- MyCODE --}}
     {{#each posts}}
@@ -37,8 +37,8 @@
     {{!-- The comment bar --}}
     <div style="margin: auto; text-align:center">
     <form action="/posts/comments/{{this._id}}/{{this.bookmark}}" method="post">
-        <input name="comment" type="text" placeholder="comment" id="comment-box" class="comment-bar">
-      <input type="Submit" value="submit">
+        <input name="comment"  type="text" placeholder="comment" id="comment-box" class="comment-bar" required pattern=".*\S+.*">
+      <input type="Submit"  id="submit-btn"value="submit">
     </form>
     </div>
     </div>

@@ -6,7 +6,9 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  padding: 20px;
 }
+
 header {
   background-color: white;
   color: red;
@@ -441,12 +443,153 @@ h5 {
 
 .register {
   background-color: white;
-  margin: 0 auto;
+  margin: 60px auto;
   text-align: right;
-  padding: 20px;
+  padding-top: 10px;
+  padding-left: 80px;
+  padding-right: 80px;
+  padding-bottom: 20px;
   box-shadow:
        inset 0 -3em 3em rgba(0,0,0,0.1),
              0 0  0 2px rgb(255,255,255),
              0.3em 0.3em 1em rgba(0,0,0,0.3);
 }
 
+/* Profile page */
+h1 {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  font-size: 20px;
+  text-align: center;
+  color: red;
+}
+h2 {
+  text-align: center;
+  color: red;
+}
+h3 {
+  text-align: center;
+}
+
+#h3-title {
+font-size: 18px;
+}
+
+#h3-comment {
+  font-size: 16px;
+}
+.user-profile {
+  margin: 0 auto;
+  padding-left: 80px;
+  padding-right: 80px;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  box-shadow:
+       inset 0 -3em 3em rgba(0,0,0,0.1),
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
+}
+
+#edit-btn {
+  border-radius: 20px;
+  padding: 5px;
+  background-color: white;
+}
+
+#bookmarkButton {
+  display: flex;
+  margin: 30px auto;
+  justify-content: center;
+  padding: 10px;
+  font-size: 14px;
+  width: 200px;
+  border-radius: 30px;
+  box-shadow:
+       inset 0 -3em 3em rgba(0,0,0,0.1),
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
+}
+
+.bookmarks {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.profile-row {
+  margin-top: 20px;
+  border: 1px solid grey;
+  border-radius: 10px;
+}
+
+.profile-meals {
+  padding-left: 5px;
+  padding-right: 10px;
+}
+
+#img_profile {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
+  display: flex;
+}
+
+.show-recipe-btn {
+  margin: 10px auto;
+  display: flex;
+  justify-content: center;
+  width: 100px;
+  padding: 5px;
+  border-radius: 30px;
+  border: 1px solid red;
+  box-shadow:
+       inset 0 -3em 3em rgba(0,0,0,0.1),
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
+}
+
+.recipe-class {
+  padding: 10px 10px;
+}
+
+.download-btn {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  width: 150px;
+  border-radius: 10px;
+  padding: 5px;
+  border: 2px solid black;
+  box-shadow:
+       inset 0 -3em 3em rgba(0,0,0,0.1),
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
+}
+
+.forum {
+  margin: 10px auto;
+  display: flex;
+  justify-content: center;
+}
+
+.comment-section {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.comment-textbox {
+  width: 200px;
+  margin-right: 5px;
+}
+
+.delete-bookmark {
+ margin: 10px auto;
+ display: flex;
+ justify-content: center;
+ width: 150px;
+ border: 2px solid black;
+ border-radius: 10px;
+ padding: 2px;
+}

@@ -93,8 +93,8 @@
            <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${html.idMeal}" class="show-recipe-btn" value="Show Recipe">Show Recipe</button>
             <div id="showRecipe-${html.idMeal}" style="display:none" class='recipe-class'>
               <div class='profile-meals'>
-             <p>Ingredients:</p>
-              <ol>
+             <p id='ingredients-profile'>Ingredients:</p>
+              <ol id='ol-profile'>
               ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
               </ol>
               <p>${html.strInstructions}</p><br>

@@ -7,7 +7,7 @@ const PostsController = {
       if (err) {
         throw err;
       }
-      res.render("posts/index", { posts: posts.reverse(), name: posts.name, meal: posts.bookmark, time: posts.createdAt, date: posts.Date});
+      res.render("posts/index", {title: "Forum page" , user: req.session.user, posts: posts.reverse(), name: posts.name, meal: posts.bookmark, time: posts.createdAt, date: posts.Date});
     });
   },
   New: (req, res) => { 
@@ -34,7 +34,7 @@ const PostsController = {
     const meal = req.params.meal
     console.log(req.params.meal)
     const name = await Post.findOneAndUpdate({_id: postID}, { $push: { comments: { "username": username, "comments": message}}})
-      res.redirect("/posts")
+    res.redirect("/posts")
   },
   View: (req, res) => {
     const name = req.params.name

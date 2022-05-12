@@ -1,28 +1,34 @@
 <head>
+  <title>{{title}}</title>
 </head>
 <body>
-<h1>Profile Page</h1>
-<h4>
+  <!-- user's settings -->
+  <h1></h1>
+  <div class="user-profile">
+<h2>Hello, {{name}} </h2>
   {{name}}
-<button onclick="showForm()">Edit your name</button>
+<button onclick="showForm()" id="edit-btn">Edit your name</button>
 <form action = "/users/name" method = "post" id="formElement" style="display: none;">
-  <label for="name">Name:</label><br>
-  <input type="text" id="name" name="name" placeholder="New name"><br>
+<br>
+  <label for="name">New name:</label><br>
+  <input type="text" id="name" name="name" placeholder="New name"><br><br>
   <input type="submit" value="Submit">
 </form>
 
   {{email}}
-<button onclick="showEmailForm()">Edit your email address</button>
+<button onclick="showEmailForm()" id="edit-btn">Edit your email address</button>
 <form action="/users/email" method="post" id="emailElement" style="display: none;">
-  <label for="email">Email:</label><br>
-  <input type="email" id="email" name="email" placeholder="New Email"><br>
+<br>
+  <label for="email">New email:</label><br>
+  <input type="email" id="email" name="email" placeholder="New Email"><br><br>
   <input type="submit" value="Submit">
 </form>
+</div>
 
-<button onlick="showBookmarks()" id="bookmarkButton">Show Bookmarks</button>
-<div id="getBookmarks"></div>
+<!-- Bookmarks -->
+<button onlick="showBookmarks()" id="bookmarkButton">Show My Bookmarks</button>
+<div id="getBookmarks" class="bookmarks"></div>
 
-</h4>
 </body>
 <script>
   const bookmark = document.getElementById('bookmarkButton')
@@ -80,38 +86,39 @@
 	      }
           data.map(html  => {
             let newHTML =
-            `<div class="row">
-              <div class="columns five" id="recipe-${html.idMeal}">
-              <h3>${html.strMeal}</h3>
-              <img src="${html.strMealThumb}" id="meal_img" alt="Meal Image" width="180" height="180">
-              
-           <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${html.idMeal}" value="Show Recipe">Show Recipe</button>
-
-            <div id="showRecipe-${html.idMeal}" style="display:none">
+            `<div class="profile-row">
+              <div class="columns" id="recipe-${html.idMeal}">
+              <h3 id="h3-title">${html.strMeal}</h3>
+              <img src="${html.strMealThumb}" id="img_profile" alt="Meal Image">
+           <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${html.idMeal}" class="show-recipe-btn" value="Show Recipe">Show Recipe</button>
+            <div id="showRecipe-${html.idMeal}" style="display:none" class='recipe-class'>
+              <div class='profile-meals'>
              <p>Ingredients:</p>
               <ol>
               ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
               </ol>
-              <p>${html.strInstructions}</p>
+              <p>${html.strInstructions}</p><br>
+              </div>
                <div class='print-recipe'>
-              <button onclick="download(event)" id="${html.idMeal}">Download as PDF</button>
+              <button onclick="download(event)" id="${html.idMeal}" class='download-btn'>Download this recipe</button>
               </div>
               </div>
               </div>
-
-              <form action="/posts/${html.strMeal}" method="post" id="bookmark_forum">
-              Want to join the conversation? <br> Share your opinions on this recipe with other foodies here! <br>
-              <input name="message" type="text" placeholder="comment">
-              <button type="submit" value="submit" id="submit">Submit</button>
-              </form>
-
-
-              </div>
-              <br>
-
+              <hr>
               <form action="/users/bookmarks/delete/${html.idMeal}" method="post">
-              <button>Delete Bookmark</button>
+              <button class="delete-bookmark">Delete This Bookmark</button>
               </form>
+              <hr>
+              <div class="forum">
+              <form action="/posts/${html.strMeal}" method="post" id="bookmark_forum">
+              <h3 id="h3-comment">Want to join the conversation? <br> Share your opinions on this recipe with other foodies here! </h3>
+              <div class="comment-section">
+              <input name="message" type="text" placeholder="Add your comment" class='comment-textbox'><br>
+              <button type="submit" value="submit" id="submit" >Submit</button>
+              </div>
+              </form>
+              </div>
+               </div>
               `;
             container.innerHTML += newHTML;
               });

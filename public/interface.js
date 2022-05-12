@@ -29,8 +29,10 @@ darkModeToggle.addEventListener('click', () => {
 
 /// GENERATE RANDOM MEAL
 const get_meal_btn = document.getElementById('get_meal');
-const meal_container = document.getElementById('meal');
+const random_meal_container = document.getElementById('meal-random');
 get_meal_btn.addEventListener('click', () => {
+	meal_container.innerHTML = '';
+	random_meal_container.innerHTML = ''
 	fetch('https://www.themealdb.com/api/json/v1/1/random.php')
 		.then(res => res.json())
 		.then(res => {
@@ -51,32 +53,28 @@ const generateRandomMeal = (meal) => {
 	}
 
 	const newInnerHTML = `
-		<div class="row">
-			<div class="columns five">
-			<br>
-			<br>
+		<div class="row-random">
 			<h5>${meal.strMeal}</h5>
- 
 				<img src="${meal.strMealThumb}" alt="Meal Image" id="thumbnail">
-				
+				<div class='random-container'>
 				${meal.strCategory ? `<p><strong>Category:</strong> ${meal.strCategory}</p>` : ''}
 				${meal.strArea ? `<p><strong>Area:</strong> ${meal.strArea}</p>` : ''}
 				${meal.strTags ? `<p><strong>Tags:</strong> ${meal.strTags.split(',').join(', ')}</p>` : ''}
-				<h4>Ingredients:</h4>
-				<ul>
-				${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+				<h4>Recipe: </h4>
+				<ul class='random-meal-ul'>
+				${ingredients.map(ingredient => `<li class='random-meal-li'> - ${ingredient}</li>`).join('')}
 				</ul>
 				</div>
-	
-				<p>${meal.strInstructions}</p>
+				<h4>Instruction: </h4>
+				<p id='random-meal-inst'>${meal.strInstructions}</p>
 
-				<h4>Video Recipe</h4>
+				<h4>Video Recipe:</h4>
 
 				<iframe width="420" height="315"
-				src="https://www.youtube.com/embed/${meal.strYoutube.slice(-11)}">
+				src="https://www.youtube.com/embed/${meal.strYoutube.slice(-11)}" id='video'>
 				</iframe>
 
-				</div>
+			
 				${meal.strYoutube ? `
 			
 				` : ''}
@@ -84,18 +82,21 @@ const generateRandomMeal = (meal) => {
 
 	const bookmarkHTML = `
 				<form action="/users/bookmarks/${meal.idMeal}" id="bookmarks" method="post">
-					<button id="">Bookmark</button>
-				</form>`
+					<button id="bookmark-random">Bookmark</button>
+				</form>
+				</div>
+				<hr>`
 
-	meal_container.innerHTML = newInnerHTML + bookmarkHTML;
+	random_meal_container.innerHTML = newInnerHTML + bookmarkHTML;
 }
 
 // FILTER RECIPES BY MAIN INGREDIENT
-
+const meal_container = document.getElementById('meal');
 const searchForm = document.querySelector('.search_form');
 let serchQuery = '';
 
 searchForm.addEventListener('submit', (event) => {
+	random_meal_container.innerHTML = ''
 	meal_container.innerHTML = '';
 	event.preventDefault();
 	searchQeury = event.target.querySelector('input').value;
@@ -154,24 +155,18 @@ function generateHTML(result) {
 			`<div class="ingredient_container">
 			<div class="result">
 			<h3>${result.strMeal}</h3>
-				<br>
 			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
-			<br>
-			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
-			<br>
+			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class='show-recipe-btn'>Show Recipe</button>
       <div id="showRecipe-${result.idMeal}" style="display:none">
 			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				<button class="bookmark-button"><i class="fa-solid fa-bookmark"> Bookmark</i>
 				</button>
 				</form>
-      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-			<h5>Ingredients:</h5>
-			<ul>
+			<p id='ingredients-main'>Ingredients:</p>
+			<ul id='ol-main'>
 			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
 			</ul>
-			<p>${result.strInstructions}</p>
+			<p id='p-meal-inst'>${result.strInstructions}</p>
       </div>
 			</div>
 			</div> `
@@ -199,6 +194,7 @@ const vietnamese_btn = document.getElementById('vietnamese')
 // Italian Cuisine
 
 italian_btn.addEventListener('click', (event) => {
+	random_meal_container.innerHTML = ''
 	meal_container.innerHTML = '';
 	event.preventDefault();
 	fetchAPIForItalian();
@@ -239,24 +235,18 @@ function generateHTMLforItalian(result) {
 			`<div class="popular_container">
 			<div class="result">
 			<h3>${result.strMeal}</h3>
-				<br>
 			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
-			<br>
-			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
-			<br>
+			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class='show-recipe-btn'>Show Recipe</button>
       <div id="showRecipe-${result.idMeal}" style="display:none">
 			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				<button class="bookmark-button"><i class="fa-solid fa-bookmark"> Bookmark</i>
 				</button>
 				</form>
-      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-			<h5>Ingredients:</h5>
-			<ul>
+			<p id='ingredients-main'>Ingredients:</p>
+			<ul id='ol-main'>
 			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
 			</ul>
-			<p>${result.strInstructions}</p>
+			<p id='p-meal-inst'>${result.strInstructions}</p>
       </div>
 			</div>
 			</div> `
@@ -266,6 +256,7 @@ function generateHTMLforItalian(result) {
 // Chinese Cuisine
 
 chinese_btn.addEventListener('click', (event) => {
+	random_meal_container.innerHTML = ''
 	meal_container.innerHTML = '';
 	event.preventDefault();
 	fetchAPIForChinese();
@@ -305,24 +296,18 @@ function generateHTMLforChinese(result) {
 			`<div class="popular_container">
 			<div class="result">
 			<h3>${result.strMeal}</h3>
-				<br>
 			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
-			<br>
 			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
-			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
 			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				<button class="bookmark-button"><i class="fa-solid fa-bookmark"> Bookmark</i>
 				</button>
 				</form>
-      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-			<h5>Ingredients:</h5>
-			<ul>
+			<p id='ingredients-main'>Ingredients:</p>
+			<ul id='ol-main'>
 			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
 			</ul>
-			<p>${result.strInstructions}</p>
+			<p id='p-meal-inst'>${result.strInstructions}</p>
       </div>
 			</div>
 			</div> `
@@ -333,6 +318,7 @@ function generateHTMLforChinese(result) {
 // French Cuisine
 
 french_btn.addEventListener('click', (event) => {
+	random_meal_container.innerHTML = ''
 	meal_container.innerHTML = '';
 	event.preventDefault();
 	fetchAPIForFrench();
@@ -372,24 +358,18 @@ function generateHTMLforFrench(result) {
 			`<div class="popular_container">
 			<div class="result">
 			<h3>${result.strMeal}</h3>
-				<br>
 			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
-			<br>
 			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
-			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
 			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				<button class="bookmark-button"><i class="fa-solid fa-bookmark"> Bookmark</i>
 				</button>
 				</form>
-      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-			<h5>Ingredients:</h5>
-			<ul>
+			<p id='ingredients-main'>Ingredients:</p>
+			<ul id='ol-main'>
 			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
 			</ul>
-			<p>${result.strInstructions}</p>
+			<p id='p-meal-inst'>${result.strInstructions}</p>
       </div>
 			</div>
 			</div> `
@@ -399,6 +379,7 @@ function generateHTMLforFrench(result) {
 // Japanese Cuisine
 
 japanese_btn.addEventListener('click', (event) => {
+	random_meal_container.innerHTML = ''
 	meal_container.innerHTML = '';
 	event.preventDefault();
 	fetchAPIForJapanese();
@@ -438,24 +419,18 @@ function generateHTMLforJapanese(result) {
 			`<div class="popular_container">
 			<div class="result">
 			<h3>${result.strMeal}</h3>
-				<br>
 			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
-			<br>
 			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
-			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
 			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				<button class="bookmark-button"><i class="fa-solid fa-bookmark"> Bookmark</i>
 				</button>
-				</form>
-      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-			<h5>Ingredients:</h5>
-			<ul>
+			</form>
+			<p id='ingredients-main'>Ingredients:</p>
+			<ul id='ol-main'>
 			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
 			</ul>
-			<p>${result.strInstructions}</p>
+			<p id='p-meal-inst'>${result.strInstructions}</p>
       </div>
 			</div>
 			</div> `
@@ -466,6 +441,7 @@ function generateHTMLforJapanese(result) {
 // Mexican Cuisine
 
 mexican_btn.addEventListener('click', (event) => {
+	random_meal_container.innerHTML = ''
 	meal_container.innerHTML = '';
 	event.preventDefault();
 	fetchAPIForMexican();
@@ -505,24 +481,18 @@ function generateHTMLforMexican(result) {
 			`<div class="popular_container">
 			<div class="result">
 			<h3>${result.strMeal}</h3>
-				<br>
 			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
-			<br>
 			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
-			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
 			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				<button class="bookmark-button"><i class="fa-solid fa-bookmark"> Bookmark</i>
 				</button>
-				</form>
-      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-			<h5>Ingredients:</h5>
-			<ul>
+			</form>
+			<p id='ingredients-main'>Ingredients:</p>
+			<ul id='ol-main'>
 			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
 			</ul>
-			<p>${result.strInstructions}</p>
+			<p id='p-meal-inst'>${result.strInstructions}</p>
       </div>
 			</div>
 			</div> `
@@ -533,6 +503,7 @@ function generateHTMLforMexican(result) {
 // Thai Cuisine
 
 thai_btn.addEventListener('click', (event) => {
+	random_meal_container.innerHTML = ''
 	meal_container.innerHTML = '';
 	event.preventDefault();
 	fetchAPIForThai();
@@ -572,24 +543,18 @@ function generateHTMLforThai(result) {
 			`<div class="popular_container">
 			<div class="result">
 			<h3>${result.strMeal}</h3>
-				<br>
 			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
-			<br>
 			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
-			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
 			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				<button class="bookmark-button"><i class="fa-solid fa-bookmark"> Bookmark</i>
 				</button>
-				</form>
-      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-			<h5>Ingredients:</h5>
-			<ul>
+			</form>
+			<p id='ingredients-main'>Ingredients:</p>
+			<ul id='ol-main'>
 			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
 			</ul>
-			<p>${result.strInstructions}</p>
+			<p id='p-meal-inst'>${result.strInstructions}</p>
       </div>
 			</div>
 			</div> `
@@ -601,6 +566,7 @@ function generateHTMLforThai(result) {
 // American Cuisine
 
 american_btn.addEventListener('click', (event) => {
+	random_meal_container.innerHTML = ''
 	meal_container.innerHTML = '';
 	event.preventDefault();
 	fetchAPIForAmerican();
@@ -640,24 +606,18 @@ function generateHTMLforAmerican(result) {
 			`<div class="popular_container">
 			<div class="result">
 			<h3>${result.strMeal}</h3>
-				<br>
 			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
-			<br>
 			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
-			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
 			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				<button class="bookmark-button"><i class="fa-solid fa-bookmark"> Bookmark</i>
 				</button>
-				</form>
-      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-			<h5>Ingredients:</h5>
-			<ul>
+			</form>
+			<p id='ingredients-main'>Ingredients:</p>
+			<ul id='ol-main'>
 			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
 			</ul>
-			<p>${result.strInstructions}</p>
+			<p id='p-meal-inst'>${result.strInstructions}</p>
       </div>
 			</div>
 			</div> `
@@ -667,6 +627,7 @@ function generateHTMLforAmerican(result) {
 // Greek Cuisine
 
 greek_btn.addEventListener('click', (event) => {
+	random_meal_container.innerHTML = ''
 	meal_container.innerHTML = '';
 	event.preventDefault();
 	fetchAPIForGreek();
@@ -706,24 +667,18 @@ function generateHTMLforGreek(result) {
 			`<div class="popular_container">
 			<div class="result">
 			<h3>${result.strMeal}</h3>
-				<br>
 			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
-			<br>
 			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
-			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
 			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				<button class="bookmark-button"><i class="fa-solid fa-bookmark"> Bookmark</i>
 				</button>
-				</form>
-      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-			<h5>Ingredients:</h5>
-			<ul>
+			</form>
+			<p id='ingredients-main'>Ingredients:</p>
+			<ul id='ol-main'>
 			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
 			</ul>
-			<p>${result.strInstructions}</p>
+			<p id='p-meal-inst'>${result.strInstructions}</p>
       </div>
 			</div>
 			</div> `
@@ -733,6 +688,7 @@ function generateHTMLforGreek(result) {
 // Moroccan Cuisine
 
 moroccan_btn.addEventListener('click', (event) => {
+	random_meal_container.innerHTML = ''
 	meal_container.innerHTML = '';
 	event.preventDefault();
 	fetchAPIForMoroccan();
@@ -772,24 +728,18 @@ function generateHTMLforMoroccan(result) {
 			`<div class="popular_container">
 			<div class="result">
 			<h3>${result.strMeal}</h3>
-				<br>
 			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
-			<br>
 			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
-			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
 			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				<button class="bookmark-button"><i class="fa-solid fa-bookmark"> Bookmark</i>
 				</button>
-				</form>
-      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-			<h5>Ingredients:</h5>
-			<ul>
+			</form>
+			<p id='ingredients-main'>Ingredients:</p>
+			<ul id='ol-main'>
 			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
 			</ul>
-			<p>${result.strInstructions}</p>
+			<p id='p-meal-inst'>${result.strInstructions}</p>
       </div>
 			</div>
 			</div> `
@@ -800,6 +750,7 @@ function generateHTMLforMoroccan(result) {
 // Vietnamese Cuisine
 
 vietnamese_btn.addEventListener('click', (event) => {
+	random_meal_container.innerHTML = ''
 	meal_container.innerHTML = '';
 	event.preventDefault();
 	fetchAPIForVietnamese();
@@ -839,24 +790,18 @@ function generateHTMLforVietnamese(result) {
 			`<div class="popular_container">
 			<div class="result">
 			<h3>${result.strMeal}</h3>
-				<br>
 			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
-			<br>
 			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
-			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
 			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				<button class="bookmark-button"><i class="fa-solid fa-bookmark"> Bookmark</i>
 				</button>
-				</form>
-      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-			<h5>Ingredients:</h5>
-			<ul>
+			</form>
+      <p id='ingredients-main'>Ingredients:</p>
+			<ul id='ol-main'>
 			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
 			</ul>
-			<p>${result.strInstructions}</p>
+			<p id='p-meal-inst'>${result.strInstructions}</p>
       </div>
 			</div>
 			</div> `
@@ -868,6 +813,7 @@ function generateHTMLforVietnamese(result) {
 
 const breakfast_btn = document.getElementById('breakfast')
 breakfast_btn.addEventListener('click', (event) => {
+	random_meal_container.innerHTML = ''
 	meal_container.innerHTML = '';
 	event.preventDefault();
 	fetchAPIForBreakfast();
@@ -906,24 +852,18 @@ function generateHTMLforBreakfast(result) {
 			`<div class="category_container">
 			<div class="result">
 			<h3>${result.strMeal}</h3>
-				<br>
 			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
-			<br>
 			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
-			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
 			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				<button class="bookmark-button"><i class="fa-solid fa-bookmark"> Bookmark</i>
 				</button>
-				</form>
-      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-			<h5>Ingredients:</h5>
-			<ul>
+			</form>
+      <p id='ingredients-main'>Ingredients:</p>
+			<ul id='ol-main'>
 			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
 			</ul>
-			<p>${result.strInstructions}</p>
+			<p id='p-meal-inst'>${result.strInstructions}</p>
       </div>
 			</div>
 			</div> `
@@ -935,6 +875,7 @@ function generateHTMLforBreakfast(result) {
 
 const dessert_btn = document.getElementById('dessert')
 dessert_btn.addEventListener('click', (event) => {
+	random_meal_container.innerHTML = ''
 	meal_container.innerHTML = '';
 	event.preventDefault();
 	fetchAPIForDessert();
@@ -973,24 +914,18 @@ function generateHTMLforDessert(result) {
 			`<div class="category_container">
 			<div class="result">
 			<h3>${result.strMeal}</h3>
-				<br>
 			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
-			<br>
 			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
-			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
 			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				<button class="bookmark-button"><i class="fa-solid fa-bookmark"> Bookmark</i>
 				</button>
 				</form>
-      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-			<h5>Ingredients:</h5>
-			<ul>
-			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
-			</ul>
-			<p>${result.strInstructions}</p>
+				<p id='ingredients-main'>Ingredients:</p>
+				<ul id='ol-main'>
+				${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+				</ul>
+				<p id='p-meal-inst'>${result.strInstructions}</p>
       </div>
 			</div>
 			</div> `
@@ -1002,6 +937,7 @@ function generateHTMLforDessert(result) {
 
 const starter_btn = document.getElementById('starter')
 starter_btn.addEventListener('click', (event) => {
+	random_meal_container.innerHTML = ''
 	meal_container.innerHTML = '';
 	event.preventDefault();
 	fetchAPIForStarter();
@@ -1040,24 +976,18 @@ function generateHTMLforStarter(result) {
 			`<div class="category_container">
 			<div class="result">
 			<h3>${result.strMeal}</h3>
-				<br>
 			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
-			<br>
 			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
-			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
 			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				<button class="bookmark-button"><i class="fa-solid fa-bookmark"> Bookmark</i>
 				</button>
 				</form>
-      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-			<h5>Ingredients:</h5>
-			<ul>
+      <p id='ingredients-main'>Ingredients:</p>
+			<ul id='ol-main'>
 			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
 			</ul>
-			<p>${result.strInstructions}</p>
+			<p id='p-meal-inst'>${result.strInstructions}</p>
       </div>
 			</div>
 			</div> `
@@ -1069,6 +999,7 @@ function generateHTMLforStarter(result) {
 
 const side_btn = document.getElementById('side')
 side_btn.addEventListener('click', (event) => {
+	random_meal_container.innerHTML = ''
 	meal_container.innerHTML = '';
 	event.preventDefault();
 	fetchAPIForSide();
@@ -1107,24 +1038,18 @@ function generateHTMLforSide(result) {
 			`<div class="category_container">
 			<div class="result">
 			<h3>${result.strMeal}</h3>
-				<br>
 			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
-			<br>
 			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
-			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
 			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				<button class="bookmark-button"><i class="fa-solid fa-bookmark"> Bookmark</i>
 				</button>
 				</form>
-      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-			<h5>Ingredients:</h5>
-			<ul>
+			<p id='ingredients-main'>Ingredients:</p>
+			<ul id='ol-main'>
 			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
 			</ul>
-			<p>${result.strInstructions}</p>
+			<p id='p-meal-inst'>${result.strInstructions}</p>
       </div>
 			</div>
 			</div> `
@@ -1136,6 +1061,7 @@ function generateHTMLforSide(result) {
 
 const vegan_btn = document.getElementById('vegan')
 vegan_btn.addEventListener('click', (event) => {
+	random_meal_container.innerHTML = ''
 	meal_container.innerHTML = '';
 	event.preventDefault();
 	fetchAPIForVegan();
@@ -1174,24 +1100,18 @@ function generateHTMLforVegan(result) {
 			`<div class="category_container">
 			<div class="result">
 			<h3>${result.strMeal}</h3>
-				<br>
 			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
-			<br>
 			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
-			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
 			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				<button class="bookmark-button"><i class="fa-solid fa-bookmark"> Bookmark</i>
 				</button>
 				</form>
-      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-			<h5>Ingredients:</h5>
-			<ul>
-			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
-			</ul>
-			<p>${result.strInstructions}</p>
+				<p id='ingredients-main'>Ingredients:</p>
+				<ul id='ol-main'>
+				${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+				</ul>
+				<p id='p-meal-inst'>${result.strInstructions}</p>
       </div>
 			</div>
 			</div> `
@@ -1203,6 +1123,7 @@ function generateHTMLforVegan(result) {
 
 const vegetarian_btn = document.getElementById('vegetarian')
 vegetarian_btn.addEventListener('click', (event) => {
+	random_meal_container.innerHTML = ''
 	meal_container.innerHTML = '';
 	event.preventDefault();
 	fetchAPIForVegetarian();
@@ -1241,24 +1162,18 @@ function generateHTMLforVegetarian(result) {
 			`<div class="category_container">
 			<div class="result">
 			<h3>${result.strMeal}</h3>
-				<br>
 			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
-			<br>
 			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
-			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
 			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				<button class="bookmark-button"><i class="fa-solid fa-bookmark"> Bookmark</i>
 				</button>
 				</form>
-      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-			<h5>Ingredients:</h5>
-			<ul>
+			<p id='ingredients-main'>Ingredients:</p>
+			<ul id='ol-main'>
 			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
 			</ul>
-			<p>${result.strInstructions}</p>
+			<p id='p-meal-inst'>${result.strInstructions}</p>
       </div>
 			</div>
 			</div> `

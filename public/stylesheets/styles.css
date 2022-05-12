@@ -2,7 +2,7 @@ body {
   font-family: 'Josefin Sans', sans-serif;
   font: 14px;
   background-color: white;
-  color: black;
+  /* color: black; */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@ body {
 }
 
 header {
-  background-color: white;
+  background-color: none;
   width: 100%;
   height: 100px;
   display: flex;
@@ -27,7 +27,7 @@ header {
 }
 
 .navbar {
-  background-color: white;
+  background-color: none;
   width: 100%;
   height: 40px;
   display: flex;
@@ -35,17 +35,18 @@ header {
 }
 
 .navbar a {
-  color: black;
+  /* color: black; */
   text-decoration: none;
 }
 
 .navbar-item {
-  color: black;
+  color: red;
   font-size: 18px;
   padding: 14px 20px;
 }
 
 #log_out {
+  color: red;
   display: block;
   padding: 12px 24px;
   background: none !important;
@@ -59,6 +60,7 @@ header {
 }
 
 #log_in {
+  color: red;
   display: block;
   padding: 12px 24px;
   background: none !important;
@@ -78,7 +80,6 @@ header {
 }
 
 h3 {
-  color: black;
   justify-content: center;
   font-size: 25px;
 }
@@ -91,7 +92,7 @@ h3 {
 
 .randommeal {
   justify-content: center;
-  background-color: white;
+  background-color: none;
   text-align: center;
   padding: 20px;
 }
@@ -112,13 +113,13 @@ h4 {
 
 .search_container {
   justify-content: center;
-  background-color: white;
+  background-color: none;
   text-align: center;
   padding: 20px;
 }
 
 #search {
-  color: black;
+  /* color: black; */
   font-weight: bold;
   width: 300px;
 }
@@ -171,7 +172,7 @@ h4 {
   width: 100px;
   height: 40px;
   background-color: red;
-  color: black;
+  /* color: black; */
   text-align: center;
   border-radius: 20px;
   padding: 5px 0;
@@ -302,18 +303,16 @@ a:active {
 }
 
 .h5 {
-  color: black;
   font-size: 14px;
   text-align: left;
   letter-spacing: 1px;
   padding-bottom: -10px;
-
 }
 
 /* end of forum styling */
 
 #search {
-  color: black;
+  /* color: black; */
   font-weight: bold;
   width: 300px;
   text-align: center;
@@ -333,7 +332,7 @@ a:active {
 }
 
 .categories {
-  color: black;
+  /* color: black; */
   width: 100%;
   height: 80px;
   margin-top: 10px;
@@ -434,7 +433,7 @@ a:active {
 }
 
 h5 {
-  color: black;
+  /* color: black; */
   font-size: 18px;
   text-align: center;
   letter-spacing: 4px;
@@ -503,7 +502,7 @@ h5 {
 }
 
 .sign-in {
-  background-color: white;
+  background-color: none;
   margin: 50px auto;
   text-align: center;
   padding: 20px;
@@ -514,7 +513,7 @@ h5 {
 }
 
 .register {
-  background-color: white;
+  background-color: none;
   margin: 60px auto;
   text-align: right;
   padding-top: 10px;
@@ -541,6 +540,7 @@ h2 {
   color: red;
 }
 h3 {
+  color: red;
   text-align: center;
 }
 
@@ -632,7 +632,8 @@ font-size: 18px;
 
 .ingredient_container {
   border: solid 1px black;
-  background: whitesmoke;
+  background: none;
+  color: none;
   border-radius: 10px;
   box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
     0 0 0 2px rgb(255, 255, 255),
@@ -641,7 +642,8 @@ font-size: 18px;
 
 .popular_container {
   border: solid 1px black;
-  background: whitesmoke;
+  background: none;
+  color: none;
   border-radius: 10px;
   box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
     0 0 0 2px rgb(255, 255, 255),
@@ -650,7 +652,8 @@ font-size: 18px;
 
 .category_container {
   border: solid 1px black;
-  background: whitesmoke;
+  background: none;
+  color: none;
   border-radius: 10px;
   box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
     0 0 0 2px rgb(255, 255, 255),
@@ -663,7 +666,7 @@ font-size: 18px;
 }
 
 .result>h3 {
-  color: black;
+  /* color: black; */
   text-align: center;
 }
 
@@ -693,15 +696,25 @@ font-size: 18px;
 }
 
 .dark-mode-toggle {
+  background-color: none;
   position: absolute;
   /* margin: 0 auto; */
   margin-left: 90%;
 }
 
 .darkmode {
-  background-color: black;
+  background-color: #2d2d2d;
   color: whitesmoke;
 }
+
+.darkmode > header {
+  background-color: none;
+}
+
+.darkmode, .navbar {
+  background-color: none;
+}
+
 
 .recipe-class {
   padding: 10px 10px;

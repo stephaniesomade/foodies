@@ -1,6 +1,8 @@
 <head>
+    <link rel='stylesheet' href='/stylesheets/styles.css' />
   <title>{{title}}</title>
 </head>
+
 <body>
   <!-- user's settings -->
   <h1></h1>
@@ -29,7 +31,7 @@
 <button onlick="showBookmarks()" id="bookmarkButton">Show My Bookmarks</button>
 <div id="getBookmarks" class="bookmarks"></div>
 
-</body>
+
 <script>
   const bookmark = document.getElementById('bookmarkButton')
   const container = document.getElementById('getBookmarks')
@@ -140,5 +142,5 @@ function download(event) {
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js" ></script>
 
-
+</body>
 

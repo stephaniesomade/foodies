@@ -93,18 +93,18 @@ const generateRandomMeal = (meal) => {
 // FILTER RECIPES BY MAIN INGREDIENT
 
 const searchForm = document.querySelector('.search_form');
-let serchQuery = '';
+let searchQuery = '';
 
 searchForm.addEventListener('submit', (event) => {
 	meal_container.innerHTML = '';
 	event.preventDefault();
-	searchQeury = event.target.querySelector('input').value;
-	fetchAPI(searchQeury);
+	searchQuery = event.target.querySelector('input').value;
+	fetchAPI(searchQuery);
 
 });
 
 async function fetchAPI() {
-	const baseURL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchQeury}`
+	const baseURL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchQuery}`
 	const response = await fetch(baseURL);
 	const data = await response.json();
 	const detailedData = data.meals;

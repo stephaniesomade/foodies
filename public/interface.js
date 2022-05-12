@@ -21,7 +21,7 @@ darkModeToggle.addEventListener('click', () => {
 	darkMode = localStorage.getItem('darkMode');
 
 	if (darkMode !== 'enabled') {
-		enableDarkMode(); 
+		enableDarkMode();
 	} else {
 		disableDarkMode();
 	}
@@ -154,17 +154,11 @@ function generateHTML(result) {
 			`<div class="ingredient_container">
 			<div class="result">
 			<h3>${result.strMeal}</h3>
-
 				<br>
-
 			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
-
 			<br>
-
 			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
-
 			<br>
-			
       <div id="showRecipe-${result.idMeal}" style="display:none">
 			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
 				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
@@ -179,12 +173,8 @@ function generateHTML(result) {
 			</ul>
 			<p>${result.strInstructions}</p>
       </div>
-			
 			</div>
-			</div> 
-			
-			
-			`
+			</div> `
 	});
 
 
@@ -246,17 +236,19 @@ function generateHTMLforItalian(result) {
 
 	result.map(result => {
 		newHTML +=
-			`<div class="row">
-			<div class="columns five">
-			<br>
-			<br>
+			`<div class="popular_container">
+			<div class="result">
 			<h3>${result.strMeal}</h3>
-			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
-
-			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
-
+				<br>
+			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
+			<br>
+			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
+			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
-
+			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				</button>
+				</form>
       ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
 			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
 			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
@@ -265,16 +257,9 @@ function generateHTMLforItalian(result) {
 			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
 			</ul>
 			<p>${result.strInstructions}</p>
-			
       </div>
-			
 			</div>
-			</div>
-			
-			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-			<button id="">Bookmark</button>
-		</form>`
-
+			</div> `
 	});
 	meal_container.innerHTML += newHTML;
 };
@@ -317,33 +302,30 @@ function generateHTMLforChinese(result) {
 
 	result.map(result => {
 		newHTML +=
-			`<div class="row">
-		 <div class="columns five">
-		 <br>
-		 <br>
-		 <h3>${result.strMeal}</h3>
-		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
-
-			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
-
+			`<div class="popular_container">
+			<div class="result">
+			<h3>${result.strMeal}</h3>
+				<br>
+			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
+			<br>
+			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
+			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
-
-		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-		 <h5>Ingredients:</h5>
-		 <ul>
-		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
-		 </ul>
-		 <p>${result.strInstructions}</p>
-
-		 </div>
-		 
-		 </div>
-		 </div>
-		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-			<button id="">Bookmark</button>
-		</form>`
+			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				</button>
+				</form>
+      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+			<h5>Ingredients:</h5>
+			<ul>
+			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+			</ul>
+			<p>${result.strInstructions}</p>
+      </div>
+			</div>
+			</div> `
 	});
 	meal_container.innerHTML += newHTML;
 };
@@ -387,33 +369,30 @@ function generateHTMLforFrench(result) {
 
 	result.map(result => {
 		newHTML +=
-			`<div class="row">
-		 <div class="columns five">
-		 <br>
-		 <br>
-		 <h3>${result.strMeal}</h3>
-		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
-
-		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
-
+			`<div class="popular_container">
+			<div class="result">
+			<h3>${result.strMeal}</h3>
+				<br>
+			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
+			<br>
+			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
+			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
-
-		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-		 <h5>Ingredients:</h5>
-		 <ul>
-		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
-		 </ul>
-		 <p>${result.strInstructions}</p>
-
-		 </div>
-		 
-		 </div>
-		 </div>
-		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-			<button id="">Bookmark</button>
-		</form>`
+			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				</button>
+				</form>
+      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+			<h5>Ingredients:</h5>
+			<ul>
+			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+			</ul>
+			<p>${result.strInstructions}</p>
+      </div>
+			</div>
+			</div> `
 	});
 	meal_container.innerHTML += newHTML;
 };
@@ -456,33 +435,30 @@ function generateHTMLforJapanese(result) {
 
 	result.map(result => {
 		newHTML +=
-			`<div class="row">
-		 <div class="columns five">
-		 <br>
-		 <br>
-		 <h3>${result.strMeal}</h3>
-		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
-
-		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
-
+			`<div class="popular_container">
+			<div class="result">
+			<h3>${result.strMeal}</h3>
+				<br>
+			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
+			<br>
+			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
+			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
-
-		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-		 <h5>Ingredients:</h5>
-		 <ul>
-		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
-		 </ul>
-		 <p>${result.strInstructions}</p>
-
-		 </div>
-		 
-		 </div>
-		 </div>
-		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-			<button id="">Bookmark</button>
-		</form>`
+			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				</button>
+				</form>
+      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+			<h5>Ingredients:</h5>
+			<ul>
+			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+			</ul>
+			<p>${result.strInstructions}</p>
+      </div>
+			</div>
+			</div> `
 	});
 	meal_container.innerHTML += newHTML;
 };
@@ -526,33 +502,30 @@ function generateHTMLforMexican(result) {
 
 	result.map(result => {
 		newHTML +=
-			`<div class="row">
-		 <div class="columns five">
-		 <br>
-		 <br>
-		 <h3>${result.strMeal}</h3>
-		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
-
-		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
-
+			`<div class="popular_container">
+			<div class="result">
+			<h3>${result.strMeal}</h3>
+				<br>
+			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
+			<br>
+			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
+			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
-
-		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-		 <h5>Ingredients:</h5>
-		 <ul>
-		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
-		 </ul>
-		 <p>${result.strInstructions}</p>
-
-		 </div>
-		 
-		 </div>
-		 </div>
-		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-			<button id="">Bookmark</button>
-		</form>`
+			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				</button>
+				</form>
+      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+			<h5>Ingredients:</h5>
+			<ul>
+			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+			</ul>
+			<p>${result.strInstructions}</p>
+      </div>
+			</div>
+			</div> `
 	});
 	meal_container.innerHTML += newHTML;
 };
@@ -596,33 +569,30 @@ function generateHTMLforThai(result) {
 
 	result.map(result => {
 		newHTML +=
-			`<div class="row">
-		 <div class="columns five">
-		 <br>
-		 <br>
-		 <h3>${result.strMeal}</h3>
-		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
-
-		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
-
+			`<div class="popular_container">
+			<div class="result">
+			<h3>${result.strMeal}</h3>
+				<br>
+			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
+			<br>
+			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
+			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
-
-		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-		 <h5>Ingredients:</h5>
-		 <ul>
-		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
-		 </ul>
-		 <p>${result.strInstructions}</p>
-
-		 </div>
-		 
-		 </div>
-		 </div>
-		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-			<button id="">Bookmark</button>
-		</form>`
+			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				</button>
+				</form>
+      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+			<h5>Ingredients:</h5>
+			<ul>
+			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+			</ul>
+			<p>${result.strInstructions}</p>
+      </div>
+			</div>
+			</div> `
 	});
 	meal_container.innerHTML += newHTML;
 };
@@ -667,33 +637,30 @@ function generateHTMLforAmerican(result) {
 
 	result.map(result => {
 		newHTML +=
-			`<div class="row">
-		 <div class="columns five">
-		 <br>
-		 <br>
-		 <h3>${result.strMeal}</h3>
-		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
-
-		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
-
+			`<div class="popular_container">
+			<div class="result">
+			<h3>${result.strMeal}</h3>
+				<br>
+			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
+			<br>
+			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
+			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
-
-		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-		 <h5>Ingredients:</h5>
-		 <ul>
-		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
-		 </ul>
-		 <p>${result.strInstructions}</p>
-
-		 </div>
-		 
-		 </div>
-		 </div>
-		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-			<button id="">Bookmark</button>
-		</form>`
+			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				</button>
+				</form>
+      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+			<h5>Ingredients:</h5>
+			<ul>
+			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+			</ul>
+			<p>${result.strInstructions}</p>
+      </div>
+			</div>
+			</div> `
 	});
 	meal_container.innerHTML += newHTML;
 };
@@ -736,33 +703,30 @@ function generateHTMLforGreek(result) {
 
 	result.map(result => {
 		newHTML +=
-			`<div class="row">
-		 <div class="columns five">
-		 <br>
-		 <br>
-		 <h3>${result.strMeal}</h3>
-		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
-
-		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
-
+			`<div class="popular_container">
+			<div class="result">
+			<h3>${result.strMeal}</h3>
+				<br>
+			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
+			<br>
+			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
+			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
-
-		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-		 <h5>Ingredients:</h5>
-		 <ul>
-		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
-		 </ul>
-		 <p>${result.strInstructions}</p>
-
-		 </div>
-		 
-		 </div>
-		 </div>
-		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-		 <button id="">Bookmark</button>
-	 </form>`
+			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				</button>
+				</form>
+      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+			<h5>Ingredients:</h5>
+			<ul>
+			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+			</ul>
+			<p>${result.strInstructions}</p>
+      </div>
+			</div>
+			</div> `
 	});
 	meal_container.innerHTML += newHTML;
 };
@@ -805,34 +769,30 @@ function generateHTMLforMoroccan(result) {
 
 	result.map(result => {
 		newHTML +=
-			`<div class="row">
-		 <div class="columns five">
-		 <br>
-		 <br>
-		 <h3>${result.strMeal}</h3>
-		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
-
-		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
-
+			`<div class="popular_container">
+			<div class="result">
+			<h3>${result.strMeal}</h3>
+				<br>
+			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
+			<br>
+			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
+			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
-
-		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-		 <h5>Ingredients:</h5>
-		 <ul>
-		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
-		 </ul>
-		 <p>${result.strInstructions}</p>
-
-		 </div>
-		 
-		 </div>
-		 </div>
-		 
-		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-			<button id="">Bookmark</button>
-		</form>`
+			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				</button>
+				</form>
+      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+			<h5>Ingredients:</h5>
+			<ul>
+			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+			</ul>
+			<p>${result.strInstructions}</p>
+      </div>
+			</div>
+			</div> `
 	});
 	meal_container.innerHTML += newHTML;
 };
@@ -876,33 +836,30 @@ function generateHTMLforVietnamese(result) {
 
 	result.map(result => {
 		newHTML +=
-			`<div class="row">
-		 <div class="columns five">
-		 <br>
-		 <br>
-		 <h3>${result.strMeal}</h3>
-		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
-
-		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
-
+			`<div class="popular_container">
+			<div class="result">
+			<h3>${result.strMeal}</h3>
+				<br>
+			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
+			<br>
+			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
+			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
-
-		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-		 <h5>Ingredients:</h5>
-		 <ul>
-		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
-		 </ul>
-		 <p>${result.strInstructions}</p>
-
-		 </div>
-		 
-		 </div>
-		 </div>
-		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-			<button id="">Bookmark</button>
-		</form>`
+			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				</button>
+				</form>
+      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+			<h5>Ingredients:</h5>
+			<ul>
+			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+			</ul>
+			<p>${result.strInstructions}</p>
+      </div>
+			</div>
+			</div> `
 	});
 	meal_container.innerHTML += newHTML;
 };
@@ -946,33 +903,30 @@ function generateHTMLforBreakfast(result) {
 
 	result.map(result => {
 		newHTML +=
-			`<div class="row">
-		 <div class="columns five">
-		 <br>
-		 <br>
-		 <h3>${result.strMeal}</h3>
-		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
-
-		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
-
+			`<div class="category_container">
+			<div class="result">
+			<h3>${result.strMeal}</h3>
+				<br>
+			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
+			<br>
+			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
+			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
-
-		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-		 <h5>Ingredients:</h5>
-		 <ul>
-		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
-		 </ul>
-		 <p>${result.strInstructions}</p>
-
-		 </div>
-		 
-		 </div>
-		 </div>
-		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-			<button id="">Bookmark</button>
-		</form>`
+			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				</button>
+				</form>
+      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+			<h5>Ingredients:</h5>
+			<ul>
+			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+			</ul>
+			<p>${result.strInstructions}</p>
+      </div>
+			</div>
+			</div> `
 	});
 	meal_container.innerHTML += newHTML;
 };
@@ -1016,33 +970,30 @@ function generateHTMLforDessert(result) {
 
 	result.map(result => {
 		newHTML +=
-			`<div class="row">
-		 <div class="columns five">
-		 <br>
-		 <br>
-		 <h3>${result.strMeal}</h3>
-		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
-
-		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
-
+			`<div class="category_container">
+			<div class="result">
+			<h3>${result.strMeal}</h3>
+				<br>
+			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
+			<br>
+			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
+			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
-
-		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-		 <h5>Ingredients:</h5>
-		 <ul>
-		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
-		 </ul>
-		 <p>${result.strInstructions}</p>
-
-		 </div>
-		 
-		 </div>
-		 </div>
-		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-			<button id="">Bookmark</button>
-		</form>`
+			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				</button>
+				</form>
+      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+			<h5>Ingredients:</h5>
+			<ul>
+			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+			</ul>
+			<p>${result.strInstructions}</p>
+      </div>
+			</div>
+			</div> `
 	});
 	meal_container.innerHTML += newHTML;
 };
@@ -1086,33 +1037,30 @@ function generateHTMLforStarter(result) {
 
 	result.map(result => {
 		newHTML +=
-			`<div class="row">
-		 <div class="columns five">
-		 <br>
-		 <br>
-		 <h3>${result.strMeal}</h3>
-		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
-
-		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
-
+			`<div class="category_container">
+			<div class="result">
+			<h3>${result.strMeal}</h3>
+				<br>
+			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
+			<br>
+			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
+			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
-
-		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-		 <h5>Ingredients:</h5>
-		 <ul>
-		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
-		 </ul>
-		 <p>${result.strInstructions}</p>
-
-		 </div>
-		 
-		 </div>
-		 </div>
-		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-			<button id="">Bookmark</button>
-		</form>`
+			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				</button>
+				</form>
+      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+			<h5>Ingredients:</h5>
+			<ul>
+			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+			</ul>
+			<p>${result.strInstructions}</p>
+      </div>
+			</div>
+			</div> `
 	});
 	meal_container.innerHTML += newHTML;
 };
@@ -1156,33 +1104,30 @@ function generateHTMLforSide(result) {
 
 	result.map(result => {
 		newHTML +=
-			`<div class="row">
-		 <div class="columns five">
-		 <br>
-		 <br>
-		 <h3>${result.strMeal}</h3>
-		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
-
-		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
-
+			`<div class="category_container">
+			<div class="result">
+			<h3>${result.strMeal}</h3>
+				<br>
+			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
+			<br>
+			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
+			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
-
-		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-		 <h5>Ingredients:</h5>
-		 <ul>
-		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
-		 </ul>
-		 <p>${result.strInstructions}</p>
-
-		 </div>
-		 
-		 </div>
-		 </div>
-		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-			<button id="">Bookmark</button>
-		</form>`
+			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				</button>
+				</form>
+      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+			<h5>Ingredients:</h5>
+			<ul>
+			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+			</ul>
+			<p>${result.strInstructions}</p>
+      </div>
+			</div>
+			</div> `
 	});
 	meal_container.innerHTML += newHTML;
 };
@@ -1226,33 +1171,30 @@ function generateHTMLforVegan(result) {
 
 	result.map(result => {
 		newHTML +=
-			`<div class="row">
-		 <div class="columns five">
-		 <br>
-		 <br>
-		 <h3>${result.strMeal}</h3>
-		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
-
-		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
-
+			`<div class="category_container">
+			<div class="result">
+			<h3>${result.strMeal}</h3>
+				<br>
+			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
+			<br>
+			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
+			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
-
-		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-		 <h5>Ingredients:</h5>
-		 <ul>
-		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
-		 </ul>
-		 <p>${result.strInstructions}</p>
-
-		 </div>
-		 
-		 </div>
-		 </div>
-		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-			<button id="">Bookmark</button>
-		</form>`
+			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				</button>
+				</form>
+      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+			<h5>Ingredients:</h5>
+			<ul>
+			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+			</ul>
+			<p>${result.strInstructions}</p>
+      </div>
+			</div>
+			</div> `
 	});
 	meal_container.innerHTML += newHTML;
 };
@@ -1296,33 +1238,30 @@ function generateHTMLforVegetarian(result) {
 
 	result.map(result => {
 		newHTML +=
-			`<div class="row">
-		 <div class="columns five">
-		 <br>
-		 <br>
-		 <h3>${result.strMeal}</h3>
-		 <img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" width="200" height="200">
-
-		 <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe">Show Recipe</button>
-
+			`<div class="category_container">
+			<div class="result">
+			<h3>${result.strMeal}</h3>
+				<br>
+			<img src="${result.strMealThumb}" id="meal_img" alt="Meal Image" text="${result.strMeal}">
+			<br>
+			<button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${result.idMeal}" value="Show Recipe" class="srbutton">Show Recipe</button>
+			<br>
       <div id="showRecipe-${result.idMeal}" style="display:none">
-
-		 ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
-		 ${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
-		 ${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
-		 <h5>Ingredients:</h5>
-		 <ul>
-		 ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
-		 </ul>
-		 <p>${result.strInstructions}</p>
-
-		 </div>
-		 
-		 </div>
-		 </div>
-		 <form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
-			<button id="">Bookmark</button>
-		</form>`
+			<form action="/users/bookmarks/${result.idMeal}" id="bookmarks" method="post">
+				<button id="" class="srbutton"><i class="fa-solid fa-bookmark"> Bookmark</i>
+				</button>
+				</form>
+      ${result.strCategory ? `<p><strong>Category:</strong> ${result.strCategory}</p>` : ''}
+			${result.strArea ? `<p><strong>Area:</strong> ${result.strArea}</p>` : ''}
+			${result.strTags ? `<p><strong>Tags:</strong> ${result.strTags.split(',').join(', ')}</p>` : ''}
+			<h5>Ingredients:</h5>
+			<ul>
+			${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+			</ul>
+			<p>${result.strInstructions}</p>
+      </div>
+			</div>
+			</div> `
 	});
 	meal_container.innerHTML += newHTML;
 };

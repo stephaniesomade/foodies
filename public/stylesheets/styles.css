@@ -476,7 +476,22 @@ h5 {
 #japanese:hover,
 #mexican:hover,
 #thai:hover {
-  color: white;
+  color: red;
+}
+
+#american:hover,
+#greek:hover,
+#moroccan:hover,
+#vietnamese:hover {
+  color: red;
+}
+
+#american,
+#greek,
+#moroccan,
+#vietnamese {
+  font-weight: bold;
+  padding: 5px;
 }
 
 .dropdown {

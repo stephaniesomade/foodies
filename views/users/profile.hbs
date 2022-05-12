@@ -1,28 +1,144 @@
-
-<script type="text/javascript">
-    function showForm() {
-        document.getElementById('formElement').style.display = 'block';
-}
-    function showEmailForm() {
-        document.getElementById('emailElement').style.display = 'block';
-}
-</script>
-
-<h1>Profile Page</h1>
-<h4>
+<head>
+  <title>{{title}}</title>
+</head>
+<body>
+  <!-- user's settings -->
+  <h1></h1>
+  <div class="user-profile">
+<h2>Hello, {{name}} </h2>
   {{name}}
-<button onclick="showForm()">Edit your name</button>
+<button onclick="showForm()" id="edit-btn">Edit your name</button>
 <form action = "/users/name" method = "post" id="formElement" style="display: none;">
-  <label for="name">Name:</label><br>
-  <input type="text" id="name" name="name" placeholder="New name"><br>
+<br>
+  <label for="name">New name:</label><br>
+  <input type="text" id="name" name="name" placeholder="New name"><br><br>
   <input type="submit" value="Submit">
 </form>
 
   {{email}}
-<button onclick="showEmailForm()">Edit your email address</button>
+<button onclick="showEmailForm()" id="edit-btn">Edit your email address</button>
 <form action="/users/email" method="post" id="emailElement" style="display: none;">
-  <label for="email">Email:</label><br>
-  <input type="email" id="email" name="email" placeholder="New Email"><br>
+<br>
+  <label for="email">New email:</label><br>
+  <input type="email" id="email" name="email" placeholder="New Email"><br><br>
   <input type="submit" value="Submit">
 </form>
-</h4>
+</div>
+
+<!-- Bookmarks -->
+<button onlick="showBookmarks()" id="bookmarkButton">Show My Bookmarks</button>
+<div id="getBookmarks" class="bookmarks"></div>
+
+</body>
+<script>
+  const bookmark = document.getElementById('bookmarkButton')
+  const container = document.getElementById('getBookmarks')
+
+    function showForm() {
+      document.getElementById('formElement').style.display = 'block';
+}
+    function showEmailForm() {
+        document.getElementById('emailElement').style.display = 'block';
+}
+
+    function ShowRecipe(event) {
+      console.log(event.target.id)
+      var Recipe = document.getElementById("showRecipe-" + event.target.id),
+        displayValue = "";
+      if (Recipe.style.display == "")
+        displayValue = "none";
+
+      Recipe.style.display = displayValue
+    }
+
+    function changeRecipeButton(event) {
+        var elem = event.target
+        if (elem.innerText == "Hide Recipe") elem.innerText = "Show Recipe";
+        else elem.innerText = "Hide Recipe";
+      }
+
+    bookmark.addEventListener('click', (event) => {
+      container.innerHTML = ''
+      event.preventDefault();
+      fetchAPI();
+    });
+
+// API for Bookmarks
+    async function fetchAPI() {
+      {{#each arr}}
+      var URL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i={{this}}`
+      var responseURL = await fetch(URL)
+      var responsejson = await responseURL.json()
+      var mealObj = await responsejson.meals 
+      generateHTML(mealObj)
+       {{/each}}
+      } 
+
+       function generateHTML(data) {
+        let newHTML = '';
+        const ingredients = [];
+        for(let i=1; i<=20; i++) {
+          if(data[0][`strIngredient${i}`]) {
+            ingredients.push(`${data[0][`strIngredient${i}`]} - ${data[0][`strMeasure${i}`]}`);
+          } else {
+            break;
+		      }
+	      }
+          data.map(html  => {
+            let newHTML =
+            `<div class="profile-row">
+              <div class="columns" id="recipe-${html.idMeal}">
+              <h3 id="h3-title">${html.strMeal}</h3>
+              <img src="${html.strMealThumb}" id="img_profile" alt="Meal Image">
+           <button onclick="ShowRecipe(event); changeRecipeButton(event);" id="${html.idMeal}" class="show-recipe-btn" value="Show Recipe">Show Recipe</button>
+            <div id="showRecipe-${html.idMeal}" style="display:none" class='recipe-class'>
+              <div class='profile-meals'>
+             <p id='ingredients-profile'>Ingredients:</p>
+              <ol id='ol-profile'>
+              ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+              </ol>
+              <p>${html.strInstructions}</p><br>
+              </div>
+               <div class='print-recipe'>
+              <button onclick="download(event)" id="${html.idMeal}" class='download-btn'>Download this recipe</button>
+              </div>
+              </div>
+              </div>
+              <hr>
+              <form action="/users/bookmarks/delete/${html.idMeal}" method="post">
+              <button class="delete-bookmark">Delete This Bookmark</button>
+              </form>
+              <hr>
+              <div class="forum">
+              <form action="/posts/${html.strMeal}" method="post" id="bookmark_forum">
+              <h3 id="h3-comment">Want to join the conversation? <br> Share your opinions on this recipe with other foodies here! </h3>
+              <div class="comment-section">
+              <input name="message" type="text" placeholder="Add your comment" class='comment-textbox'><br>
+              <button type="submit" value="submit" id="submit" >Submit</button>
+              </div>
+              </form>
+              </div>
+               </div>
+              `;
+            container.innerHTML += newHTML;
+              });
+       }
+function download(event) {
+ var doc = new jsPDF('l', 'mm', 'letter'); //l - landscape, mm - unit, letter - format
+  doc.fromHTML(document.getElementById("recipe-" + event.target.id), // page element to be printed as PDF
+  5, //margin left
+  -2, //margin top
+  {
+    'width': 170
+  },
+  function(a) 
+   { 
+     doc.save("recipe.pdf");
+  });
+}
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js" ></script>
+
+
+

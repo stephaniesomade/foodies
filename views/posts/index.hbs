@@ -1,0 +1,69 @@
+
+<body>
+  <h4>The Foodies Forum</h4>
+  <h5 class="h5">
+    
+    {{#each posts}}
+     <div class="detailBox">
+    {{!-- The original post --}}
+
+      <div class="titleBox">
+        <form action="/posts/get/{{this.bookmark}}" method="get"></form>
+          <div class="tooltip">{{this.bookmark}}<span class="tooltiptext"><a href="posts/get/{{this.bookmark}}"><p>View Recipe</p></span></div></a>
+            <br><br>{{this.name}} <div style="text-align: right;">[{{this.Date}}]</div>
+        </div>
+      <div class="commentBox" style="text-align:center;">
+        <br>{{this.message}}<br><br>
+        </form>
+      </div>
+      {{!-- The comment section --}}
+
+      <div class="actionBox">
+        Comments:
+        {{#each this.comments}}
+          <ul class="commentList">
+            <li style="text-align: left;">{{this.comments}}</li>
+            <span class="date sub-text">{{this.username}}</span>
+        {{/each}}
+      </div>
+    
+    {{!-- The comment bar --}}
+    <div style="margin: auto; text-align:center">
+      <form action="/posts/comments/{{this._id}}/{{this.bookmark}}" method="post">
+          <input name="comment"  type="text" placeholder="comment" id="comment-box" class="comment-bar" required pattern=".*\S+.*">
+          <input type="Submit"  id="submit-btn"value="submit">
+      </form><br><br>
+    </div>
+    </div>
+    </div><br><br>
+    {{/each}}
+    <br>
+    <br>
+    <br>
+   </div>
+ 
+  <button onclick="topFunction()" id="myBtn" title="Go to top">Back to the top</button>
+
+  <script>
+    var mybutton = document.getElementById("myBtn");
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+
+// When the user clicks on the button, scroll back to the top of the document
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+   // window.scrollTo(0, document.body.scrollHeight)
+  </script>
+</body>
+
+
+

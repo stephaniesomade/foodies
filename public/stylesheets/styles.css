@@ -1,0 +1,821 @@
+body {
+  font-family: 'Josefin Sans', sans-serif;
+  font: 14px;
+  background-color: white;
+  color: black;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+header {
+  background-color: white;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.main_title {
+  color: red;
+  font-size: 60px;
+  letter-spacing: 3px;
+}
+
+.navbar {
+  background-color: white;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar a {
+  color: black;
+  text-decoration: none;
+}
+
+.navbar-item {
+  color: black;
+  font-size: 18px;
+  padding: 14px 20px;
+}
+
+#log_out {
+  display: block;
+  padding: 12px 24px;
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  cursor: pointer;
+  font-size: 18px;
+  text-decoration: none;
+  transition-duration: .25s;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+#log_in {
+  display: block;
+  padding: 12px 24px;
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  cursor: pointer;
+  font-size: 18px;
+  text-decoration: none;
+  transition-duration: .25s;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.navbar-item:hover,
+#log_out:hover,
+#log_in:hover {
+  color: red;
+}
+
+h3 {
+  color: black;
+  justify-content: center;
+  font-size: 25px;
+}
+
+#options_container {
+  background-color: 0 0 0 2px rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+}
+
+.randommeal {
+  justify-content: center;
+  background-color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+h4 {
+  font-size: 20px;
+  font-weight: lighter;
+}
+
+#get_meal {
+  font-weight: bolder;
+  padding: 5px;
+  box-shadow:
+    inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+
+.search_container {
+  justify-content: center;
+  background-color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+#search {
+  color: black;
+  font-weight: bold;
+  width: 300px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 64px 128px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* For the back to the Top Button */
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+#myBtn:hover {
+  background-color: #555;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  width: 120px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 100px;
+  height: 40px;
+  background-color: red;
+  color: black;
+  text-align: center;
+  border-radius: 20px;
+  padding: 5px 0;
+
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+/* Override the CSS link styling */
+a:link {
+  text-decoration: none;
+}
+
+a:visited p {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+/* Comment Bar on Forum Page */
+
+.comment {
+  display: flex;
+  margin: auto;
+  align-items: right;
+}
+
+#comment-box {
+  padding: 15px;
+  border: 1px solid #EBEDF5;
+  width: 50%;
+}
+
+.card:hover {
+  box-shadow: 0 64px 128px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}
+
+/* Forum */
+
+@import url(//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css);
+
+.detailBox {
+  width: 400px;
+  border: 1px solid #bbb;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.titleBox {
+  background-color: #fdfdfd;
+  padding: 10px;
+}
+
+.titleBox label {
+  color: #444;
+  margin: 0;
+  display: inline-block;
+}
+
+.commentBox {
+  padding: 10px;
+  border-top: 1px dotted #bbb;
+}
+
+.commentBox .form-group:first-child,
+.actionBox .form-group:first-child {
+  width: 80%;
+}
+
+.commentBox .form-group:nth-child(2),
+.actionBox .form-group:nth-child(2) {
+  width: 18%;
+}
+
+.actionBox .form-group * {
+  width: 100%;
+}
+
+.taskDescription {
+  margin-top: 10px 0;
+}
+
+.commentList {
+  padding: 0;
+  list-style: none;
+  max-height: 200px;
+  overflow: auto;
+}
+
+.commentList li {
+  margin: 0;
+  margin-top: 10px;
+}
+
+.commentList li>div {
+  display: table-cell;
+}
+
+.commentText p {
+  margin: 0;
+}
+
+.sub-text {
+  color: red;
+  font-family: verdana;
+  font-size: 11px;
+}
+
+.actionBox {
+  border-top:1px dotted #bbb;
+  padding:10px;
+  text-align: left;
+}
+
+.h5 {
+  color: black;
+  font-size: 14px;
+  text-align: left;
+  letter-spacing: 1px;
+  padding-bottom: -10px;
+
+}
+
+/* end of forum styling */
+
+#search {
+  color: black;
+  font-weight: bold;
+  width: 300px;
+  text-align: center;
+  padding: 5px;
+  box-shadow:
+    inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+
+#submit-btn {
+  padding: 5px;
+  box-shadow:
+    inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+
+.categories {
+  color: black;
+  width: 100%;
+  height: 80px;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+
+}
+
+.category-btn {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.category-btn li {
+  padding: 0 40px;
+}
+
+#breakfast,
+#dessert,
+#starter,
+#side,
+#vegan,
+#vegetarian {
+  border-radius: 60px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  -webkit-text-stroke: 1px white;
+}
+
+.fa-bacon,
+.fa-ice-cream,
+.fa-bowl-rice,
+.fa-shrimp,
+.fa-seedling,
+.fa-pepper-hot {
+  color: red;
+  font-size: 30px;
+}
+
+.category-items {
+  color: black;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.fa-bacon:hover,
+.fa-ice-cream:hover,
+.fa-bowl-rice:hover,
+.fa-shrimp:hover,
+.fa-seedling:hover,
+.fa-pepper-hot:hover {
+  color: black;
+}
+
+#breakfast:hover,
+#dessert:hover,
+#starter:hover,
+#side:hover,
+#vegan:hover,
+#vegetarian:hover {
+  -webkit-text-stroke: 1px white;
+}
+
+.popular {
+  /* background-color: white;
+  float: right;
+  border-color: black;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: -10px; */
+  color: black;
+  width: 100%;
+  height: 80px;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.popular-by-area {
+  /* list-style: none;
+  padding: 0;
+  justify-content: center; */
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.popular-by-area li {
+  padding: 0 10px;
+  padding-top: 15px;
+  align-items: center;
+}
+
+h5 {
+  color: black;
+  font-size: 18px;
+  text-align: center;
+  letter-spacing: 4px;
+  padding-bottom: -10px;
+}
+
+#italian,
+#chinese,
+#french,
+#japanese,
+#mexican,
+#thai,
+#see_more {
+  font-weight: bold;
+  padding: 5px;
+}
+
+#italian,
+#chinese,
+#french,
+#japanese,
+#mexican,
+#thai,
+#american,
+#greek,
+#moroccan,
+#vietnamese,
+#see_more {
+  text-transform: uppercase;
+  width: 120px;
+  box-shadow:
+    inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+
+#italian:hover,
+#chinese:hover,
+#french:hover,
+#japanese:hover,
+#mexican:hover,
+#thai:hover {
+  color: white;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+}
+
+.dropdown-content li {
+  display: block;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: whitesmoke;
+}
+
+.sign-in {
+  background-color: white;
+  margin: 50px auto;
+  text-align: center;
+  padding: 20px;
+  box-shadow:
+    inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+
+.register {
+  background-color: white;
+  margin: 60px auto;
+  text-align: right;
+  padding-top: 10px;
+  padding-left: 80px;
+  padding-right: 80px;
+  padding-bottom: 20px;
+  box-shadow:
+       inset 0 -3em 3em rgba(0,0,0,0.1),
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
+}
+
+
+/* Profile page */
+h1 {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  font-size: 20px;
+  text-align: center;
+  color: red;
+}
+h2 {
+  text-align: center;
+  color: red;
+}
+h3 {
+  text-align: center;
+}
+
+#h3-title {
+font-size: 18px;
+}
+
+#h3-comment {
+  font-size: 16px;
+}
+.user-profile {
+  margin: 0 auto;
+  padding-left: 80px;
+  padding-right: 80px;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  box-shadow:
+       inset 0 -3em 3em rgba(0,0,0,0.1),
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
+}
+
+#edit-btn {
+  border-radius: 20px;
+  padding: 5px;
+  background-color: white;
+}
+
+#bookmarkButton {
+  display: flex;
+  margin: 30px auto;
+  justify-content: center;
+  padding: 10px;
+  font-size: 14px;
+  width: 200px;
+  border-radius: 30px;
+  box-shadow:
+       inset 0 -3em 3em rgba(0,0,0,0.1),
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
+}
+
+.bookmarks {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.profile-row {
+  margin-top: 20px;
+  border: 1px solid grey;
+  border-radius: 10px;
+}
+
+.profile-meals {
+  padding-left: 5px;
+  padding-right: 10px;
+}
+
+#img_profile {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
+  display: flex;
+}
+
+.show-recipe-btn, #bookmark-random, .srbutton {
+  margin: 10px auto;
+  display: flex;
+  justify-content: center;
+  width: 100px;
+  padding: 5px;
+  border-radius: 30px;
+  border: 1px solid red;
+  box-shadow:
+    inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+
+.bookmark-button {
+  font-size: 10px;
+  margin: 10px auto;
+  display: flex;
+  justify-content: center;
+  width: 150px;
+  padding: 2px;
+  border-radius: 30px;
+  border: 1px solid red;
+  box-shadow:
+    inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+
+#ingredients-profile {
+  text-align: center;
+}
+#ol-profile {
+  list-style: none;
+}
+
+.meal {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+  width: auto;
+}
+
+.ingredient_container {
+  border: solid 1px black;
+  background: whitesmoke;
+  border-radius: 10px;
+  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+
+.popular_container {
+  border: solid 1px black;
+  background: whitesmoke;
+  border-radius: 10px;
+  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+
+.category_container {
+  border: solid 1px black;
+  background: whitesmoke;
+  border-radius: 10px;
+  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+
+.result {
+  position: relative;
+  justify-content: space-between;
+}
+
+.result>h3 {
+  color: black;
+  text-align: center;
+}
+
+.result #meal_img {
+  display: flex;
+  justify-content: center;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
+}
+
+
+
+.fa-bookmark {
+  font-size: 20px;
+  color: red;
+}
+
+.dark-mode-toggle {
+  position: absolute;
+  /* margin: 0 auto; */
+  margin-left: 90%;
+}
+
+.darkmode {
+  background-color: black;
+  color: whitesmoke;
+}
+
+.recipe-class {
+  padding: 10px 10px;
+}
+
+.download-btn {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  width: 150px;
+  border-radius: 10px;
+  padding: 5px;
+  border: 2px solid black;
+  box-shadow:
+       inset 0 -3em 3em rgba(0,0,0,0.1),
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
+}
+
+.forum {
+  margin: 10px auto;
+  display: flex;
+  justify-content: center;
+}
+
+.comment-section {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.comment-textbox {
+  width: 200px;
+  margin-right: 5px;
+}
+
+.delete-bookmark {
+ margin: 10px auto;
+ display: flex;
+ justify-content: center;
+ width: 150px;
+ border: 2px solid black;
+ border-radius: 10px;
+ padding: 2px;
+}
+
+
+/* random meal generator styling */
+
+.row-random {
+  margin: 0 auto;
+}
+#thumbnail {
+  height: 300px;
+  width: auto;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.random-container {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+.random-container p, h4, ul, li {
+  text-align: center;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.random-meal-ul {
+  list-style: none;
+}
+
+#random-meal-inst {
+  font-size: 18px;
+  text-align: center;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+#video {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+/* home page styling */
+
+#ingredients-main {
+  text-align: center;
+}
+
+#ol-main {
+  list-style: none;
+}
+
+#p-meal-inst {
+  font-size: 16px;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
